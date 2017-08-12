@@ -23,7 +23,7 @@ module.exports = {
   resolve: {
     alias: {
       // test:path.resolve(__dirname,'test/test.js')
-      jquery: path.resolve(__dirname, "js/lib/jquery-2.0.3.min.js"),
+      jquery: path.resolve(__dirname, "js/lib/jq214.js"),
       mod: path.resolve(__dirname, "js/mod"),
       lib: path.resolve(__dirname, "js/lib"),
       img: path.resolve(__dirname, "img"),

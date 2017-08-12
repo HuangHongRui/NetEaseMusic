@@ -19,6 +19,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow-x: hidden;
   background: transparent url(http://p3.music.126.net/iMEpR_WRMEZv48G3DB6sMw==/18225504742568899.jpg) no-repeat center;
   background-size: cover;
 }
@@ -50,6 +51,18 @@
   position: absolute;
   border-radius: 50%;
   animation: circle 15s infinite linear;
+}
+.page .song-description {
+  color: #AEABAC;
+  text-align: center;
+  line-height: 2;
+}
+.page .song-description h1 {
+  font-size: 18px;
+  color: #fff;
+}
+.page .song-description .lyric {
+  font-size: 14px;
 }
 
 /*# sourceMappingURL=index.css.map*/

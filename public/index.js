@@ -63,22 +63,94 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+var getJSON = function getJSON(url) {
+  var promise = new Promise(function (resolve, reject) {
+    var client = new XMLHttpRequest();
+    client.open("GET", url);
+    client.onreadystatechange = handler;
+    client.responseType = "json";
+    client.setRequestHeader("Accept", "application/json");
+    client.send();
+
+    function handler() {
+      if (this.readyState !== 4) {
+        return;
+      }
+      if (this.status === 200) {
+        resolve(this.response);
+      } else {
+        reject(new Error(this.statusText));
+      }
+    };
+  });
+  return promise;
+};
+
+getJSON("../src/js/lib/lyric.json").then(function (json) {
+  var lyric = json.lyric;
+
+  var array = lyric.split('\n');
+  var regex = /^\[(.+)\](.*)/;
+  array = array.map(function (string, index) {
+    var matches = string.match(regex);
+    // console.log(matches)
+    if (!matches) return;
+    return { time: matches[1], words: matches[2] };
+  });
+  // console.log(array)
+  var lyricNode = document.querySelector('.lyric');
+  array.map(function (object) {
+    // console.log(object)
+    if (!object) return;
+    var lyricP = document.createElement('p');
+    var lyricText = document.createTextNode(object.words);
+    lyricP.setAttribute('data-time', object.time);
+    lyricP.appendChild(lyricText);
+    lyricNode.appendChild(lyricP);
+  });
+
+  console.log(lyricNode);
+}, function (error) {
+  console.error('出错了', error);
+});
+
+// let xhr = new XMLHttpRequest()
+// xhr.open("get","../src/js/lib/lyric.json")
+// xhr.onreadystatechange = function() {
+// 	if (xhr.readyState == 4) {
+// 		if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+// 			// console.log(xhr.responseText)
+// 			lyric
+// 		}
+// 	}
+// }
+
+// xhr.send()
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(1);
 __webpack_require__(0);
 
 /***/ })
