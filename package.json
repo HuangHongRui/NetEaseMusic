@@ -1,7 +1,7 @@
 {
   "name": "NetEaseMusic",
   "version": "1.0.0",
-  "description": "a collection of simple demos of Webpack2",
+  "description": "Yeah",
   "main": "index.js",
   "keywords": [
     "build",
@@ -9,7 +9,7 @@
     "webpack2"
   ],
   "scripts": {
-    "write": "webpack",
+    "webpack": "webpack --config src/webpack.config.js",
     "watch": "onchange 'src/**/*.js' 'src/**/*.css' 'src/**/*.less' 'src/**/*.scss' -- npm run webpack"
   },
   "author": "HuangHongRui",
