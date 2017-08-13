@@ -44,13 +44,11 @@
   width: 80vw;
   position: absolute;
   z-index: 1;
-  animation: circle 15s infinite linear;
 }
 .page .disc-container .disc .cover {
   width: 50vw;
   position: absolute;
   border-radius: 50%;
-  animation: circle 15s infinite linear;
 }
 .page .disc-container .playing .light,
 .page .disc-container .playing .cover {

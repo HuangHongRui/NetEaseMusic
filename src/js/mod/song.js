@@ -44,9 +44,11 @@ getJSON("../src/js/lib/lyric.json").then(function(json) {
   })
   // console.log(lyricNode)
   let audio = document.createElement('audio')
-  audio.src = "http://m10.music.126.net/20170813160923/c287b9b9ed026565247c87a17208d9c2/ymusic/80c6/33f5/6746/727b26cdc9d91748077edb4a540c7fe7.mp3"
+  audio.src = "http://dl.stream.qqmusic.qq.com/C400002wJJpU0kLcQZ.m4a?fromtag=38&vkey=FFA46BADF3B7E98751F531B2F563EBD8AF08A11069692445CFA4E015B2E6587A3F1CCD8019B9DF1B217C3A64570BC3C3C217B98944E4EB2E&guid=8708071248"
   audio.oncanplay = function(){
     audio.play()
+    let discNode = document.querySelector('.disc')
+    discNode.className += " playing"
   }
 
 }, function(error) {
