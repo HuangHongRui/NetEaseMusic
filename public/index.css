@@ -37,6 +37,22 @@
   align-items: center;
   margin-top: 18vw;
 }
+.page .disc-container .disc .icon-wrapper {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  width: 20vw;
+  height: 20vw;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px #fff;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+.page .disc-container .disc .icon-wrapper .icon {
+  width: 10vw;
+  fill: #fff;
+}
 .page .disc-container .disc .ring {
   width: 80vw;
 }
@@ -49,10 +65,22 @@
   width: 50vw;
   position: absolute;
   border-radius: 50%;
+  animation: circle 15s infinite linear;
+  animation-play-state: paused;
 }
 .page .disc-container .playing .light,
 .page .disc-container .playing .cover {
   animation: circle 15s infinite linear;
+  animation-play-state: running;
+}
+.page .disc-container .icon-pause {
+  display: none;
+}
+.page .disc-container .playing .icon-play {
+  display: none;
+}
+.page .disc-container .playing .icon-pause {
+  display: block;
 }
 .page .song-description {
   flex-grow: 1;
@@ -101,7 +129,7 @@
   color: #fff;
 }
 .page:before {
-  content: '1';
+  content: '';
   display: block;
   position: absolute;
   border: 1px solid;

@@ -9,13 +9,19 @@
 	.disc-container { position: relative;
 		.pointer { width: 26vw; position: absolute; left: 46vw; };
 		.disc{ display: flex; justify-content: center; align-items: center; margin-top: 18vw;
-
+			.icon-wrapper {position: absolute; z-index: 2; display: flex; width: 20vw; height: 20vw; justify-content: center; align-items: center; border: solid 1px #fff;  background: rgba(0, 0, 0, 0.5); border-radius: 50%;
+				.icon { width: 10vw; fill: #fff; }
+			}
 			.ring { width: 80vw; };
 			.light { width: 80vw; position: absolute; z-index: 1; };
-			.cover { width: 50vw; position: absolute; border-radius: 50%; };
+			.cover { width: 50vw; position: absolute; border-radius: 50%; animation: circle 15s infinite linear; animation-play-state: paused;};
 		}
+		// .cover { width: 50vw; position: absolute; border-radius: 50%; animation-play-state: paused;}
 		.playing .light,
-		.playing .cover { animation: circle 15s infinite linear; }
+		.playing .cover { animation: circle 15s infinite linear; animation-play-state: running;}
+		.icon-pause	{ display: none;}
+		.playing .icon-play { display: none;}
+		.playing .icon-pause { display: block;}
 	}
 
   .song-description {flex-grow: 1; color: #fff; text-align: center; line-height: 2; margin-top: 20px; z-index: 1;
@@ -32,4 +38,4 @@
 		
 	}
 }
-.page:before { content: '1'; display: block; position: absolute; border: 1px solid; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 0; }
+.page:before { content: ''; display: block; position: absolute; border: 1px solid; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 0; }

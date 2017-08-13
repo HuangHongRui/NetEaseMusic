@@ -45,24 +45,39 @@ getJSON("../src/js/lib/lyric.json").then(function(json) {
   // console.log(lyricNode)
   let audio = document.createElement('audio')
   let discNode = document.querySelector('.disc')
+  let coverAnimation = document.querySelector('.cover')
   audio.src = "http://dl.stream.qqmusic.qq.com/C400002wJJpU0kLcQZ.m4a?fromtag=38&vkey=FFA46BADF3B7E98751F531B2F563EBD8AF08A11069692445CFA4E015B2E6587A3F1CCD8019B9DF1B217C3A64570BC3C3C217B98944E4EB2E&guid=8708071248"
   audio.oncanplay = function(){
     audio.play()
     discNode.className += " playing"
   }
 
-  let play = document.querySelector('.play')
-  play.onclick = function(e) {
-    audio.play(e)
+  let play = document.querySelector('.icon-play')
+  play.onclick = function() {
+    console.log("点到我了")
+    audio.play()
+    discNode.className += " playing"
+  }
+  let pause = document.querySelector('.icon-pause')
+  pause.onclick = function() {
+    console.log("点到我了")
+    audio.pause()
+    discNode.classList.remove('playing')
+  }
+//*********
+  let playbtn = document.querySelector('.play')
+  playbtn.onclick = function(e) {
+    audio.play()
     discNode.className += " playing"
     e.stopPropagation()
   }
-  let pause = document.querySelector('.pause')
-  pause.onclick = function(e) {
+  let pausebtn = document.querySelector('.pause')
+  pausebtn.onclick = function(e) {
     audio.pause()
     discNode.classList.remove('playing')
     e.stopPropagation()
   }
+//*********
 }, function(error) {
   console.error('出错了', error);
 });
