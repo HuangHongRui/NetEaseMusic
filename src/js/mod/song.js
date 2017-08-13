@@ -32,7 +32,7 @@ getJSON("../src/js/lib/lyric.json").then(function(json) {
   	return {time: matches[1], words: matches[2]}
   })
   // console.log(array)
-  let lyricNode = document.querySelector('.lyric')
+  let lyricNode = document.querySelector('.lines')
   array.map(function(object){
   	// console.log(object)
   	if(!object) return
@@ -42,8 +42,12 @@ getJSON("../src/js/lib/lyric.json").then(function(json) {
   	lyricP.appendChild(lyricText)
   	lyricNode.appendChild(lyricP)
   })
-
-  console.log(lyricNode)
+  // console.log(lyricNode)
+  let audio = document.createElement('audio')
+  audio.src = "http://m10.music.126.net/20170813160923/c287b9b9ed026565247c87a17208d9c2/ymusic/80c6/33f5/6746/727b26cdc9d91748077edb4a540c7fe7.mp3"
+  audio.oncanplay = function(){
+    audio.play()
+  }
 
 }, function(error) {
   console.error('出错了', error);
