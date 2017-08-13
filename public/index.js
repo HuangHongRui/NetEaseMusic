@@ -183,7 +183,7 @@ getJSON("../src/js/lib/lyric.json").then(function (json) {
   var audio = document.createElement('audio');
   var discNode = document.querySelector('.disc');
   var coverAnimation = document.querySelector('.cover');
-  audio.src = "http://dl.stream.qqmusic.qq.com/C400002wJJpU0kLcQZ.m4a?fromtag=38&vkey=FFA46BADF3B7E98751F531B2F563EBD8AF08A11069692445CFA4E015B2E6587A3F1CCD8019B9DF1B217C3A64570BC3C3C217B98944E4EB2E&guid=8708071248";
+  audio.src = "//dl.stream.qqmusic.qq.com/C400002wJJpU0kLcQZ.m4a?fromtag=38&vkey=FFA46BADF3B7E98751F531B2F563EBD8AF08A11069692445CFA4E015B2E6587A3F1CCD8019B9DF1B217C3A64570BC3C3C217B98944E4EB2E&guid=8708071248";
   audio.oncanplay = function () {
     audio.play();
     discNode.className += " playing";

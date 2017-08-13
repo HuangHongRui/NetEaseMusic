@@ -20,7 +20,7 @@ $(function(){
 	})
 
 	let audio = document.createElement('audio')
-	audio.src = "http://m10.music.126.net/20170813160923/c287b9b9ed026565247c87a17208d9c2/ymusic/80c6/33f5/6746/727b26cdc9d91748077edb4a540c7fe7.mp3"
+	audio.src = "//m10.music.126.net/20170813160923/c287b9b9ed026565247c87a17208d9c2/ymusic/80c6/33f5/6746/727b26cdc9d91748077edb4a540c7fe7.mp3"
 	audio.oncanplay = function(){
 		audio.play()
 		$('disc').addClass('playing')
