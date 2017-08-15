@@ -1,16 +1,16 @@
 ul,ol {list-style: none;}
-h1,h2,h3 {font-weight: normal;}
+h1,h2,h3 {font-weight: normal; font-family: Helvetica,sans-serif; color: #333;}
 body {font-size: 3.7vw;}
 
 section>h2:first-child {font-size: 4.53vw; border-left: 2px solid #D33A31; margin:  4vw 0; padding-left: 2vw; line-height: 4.7vw; max-height: 3.7vw; }
-a {text-decoration: none;}
+a {text-decoration: none; color: inherit;}
 
-.topbar {background: #D43C33; padding: 4.8vw 3vw; display: flex; align-items: center; justify-content: space-between;
+.topbar {position: fixed; width: 100%; z-index: 5; top: 0; background: #D43C33; padding: 4.8vw 3vw; display: flex; align-items: center; justify-content: space-between;
 	.logo {width: 38vw;}
 	.sourceCode {max-height: 7vw; line-height: 7.2vw; border: solid #fff 1px; border-radius: 3.5vw; color: #fff; text-decoration: none; padding: 0 1em; letter-spacing: 0.1em;}
 }
 
-.siteNav {
+.siteNav { position: fixed; z-index: 3; top: 16.5vw; background: #fff; width: 100%;
 	>ol {display: flex; text-align: center; border-bottom: 1px solid #ccc; font-size: 1.1em;
 		>li {flex: 1;
 			>span {max-height: 10.3vw;line-height: 11.3vw; display: inline-block; position: relative;}
@@ -21,24 +21,26 @@ a {text-decoration: none;}
 	}
 }
 
-.playlists {margin-top: 5vw;
+.playlists { margin-top: 31.5vw; 
 	>ul{ display: flex; flex-wrap: wrap; justify-content: space-between;
 		li { width: calc(33.3333333% - 0.5vw); margin-bottom: 4vw; position: relative;};
 		.listen {width: 3.2vw; height: 3.2vw; fill: #fff;}
 		span { position: absolute; top: 0; right: 1vw; color: #fff; font-size: 3.5vw; text-shadow: 1px 0 0 rgba(0,0,0,.15); display: flex; align-items: center; line-height: 7vw;}
 		li::before {content: ""; display: block; position: absolute; width: 100%; height: 6vw; z-index: 2; background-image: linear-gradient(180deg,rgba(0,0,0,.2),transparent)}
 		img { width: 100%;}
-		p {display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 0.92em; padding: 0.5vw 1.6vw; line-height: 4.5vw;}
+		p {display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 0.95em; padding: 0.5vw 1.6vw; line-height: 4.6vw; color: #333;}
 	}
 }
 
 .lastestMusic {
+	> p {text-align: center;}
 	ol{padding-left: 2.8vw;
-		li {border-bottom: 1px solid #E2E2E3; margin: 1vw 0; position: relative;
-			h3 {font-size: 4.53vw;}
-			p {font-size: 3.2vw; color: #888; display: flex; line-height: 1; align-items: center;}
-			.playCl svg {width: 5.9vw; height: 5.9vw; position: absolute; right: 4vw; top: 50%; transform: translateY(-50%); fill: #AAA;}
-			.sq {width: 4.2vw; height: 4.2vw; fill: #FE672E; margin-right: 0.25em;}
+		li {border-bottom: 1px solid #E2E2E3; padding: 1.6vw 0; position: relative;
+			h3 {font-size: 4.6vw; line-height: 7vw;}
+			p {font-size: 4vw; color: #888; display: flex; line-height: 1; align-items: center;}
+			.playCl {width: 5.9vw; height: 5.9vw; position: absolute; right: 4vw; top: 50%; transform: translateY(-50%); fill: #AAA;}
+			.hide {display: none;}
+			.sq {width: 4.2vw; height: 4.2vw; fill: #FE672E; margin-right: 0.25em; display: inline-block;}
 		}
 	}
 }

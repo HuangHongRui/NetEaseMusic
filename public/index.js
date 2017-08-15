@@ -135,102 +135,64 @@
 
 
 var getJSON = function getJSON(url) {
-  var promise = new Promise(function (resolve, reject) {
-    var client = new XMLHttpRequest();
-    client.open("GET", url);
-    client.onreadystatechange = handler;
-    client.responseType = "json";
-    client.setRequestHeader("Accept", "application/json");
-    client.send();
+	var promise = new Promise(function (resolve, reject) {
+		var client = new XMLHttpRequest();
+		client.open('GET', url);
+		client.onreadystatechange = handler;
+		client.responseType = "json";
+		client.setRequestHeader("Accept", "application/json");
+		client.send();
 
-    function handler() {
-      if (this.readyState !== 4) {
-        return;
-      }
-      if (this.status === 200) {
-        resolve(this.response);
-      } else {
-        reject(new Error(this.statusText));
-      }
-    };
-  });
-  return promise;
+		function handler() {
+			if (this.readyState !== 4) {
+				return;
+			}
+			if (this.status === 200) {
+				resolve(this.response);
+			} else {
+				reject(new Error(this.statusText));
+			}
+		};
+	});
+	return promise;
 };
 
-getJSON("../src/js/lib/lyric.json").then(function (json) {
-  var lyric = json.lyric;
+setTimeout(function () {
+	getJSON('../src/js/lib/song.json').then(function (json) {
+		var items = json;
+		items.forEach(function (ele) {
+			// console.log(ele.id)
+			var judge = Math.random() > 0.5 ? 'sq' : '';
+			var li = "\n\t\t<a href=\"../../../bin/song.html?id=" + ele.id + "\">\n\t\t<h3>" + ele.name + "</h3>\n\t\t<p>\n\t\t<svg class=\"" + judge + " hide\">\n\t\t<use xlink:href=\"#icon-sq\"></use>\n\t\t</svg>\n\t\t" + ele.author + "-" + ele.info + "</p>\n\t\t<svg class=\"playCl\">\n\t\t<use xlink:href=\"#icon-play-circle\"></use>\n\t\t</svg>\n\t\t</a>\n\t\t";
+			var liDom = parseToDom(li);
+			document.querySelector("#songItems").appendChild(liDom);
+			function parseToDom(str) {
+				var div = document.createElement("li");
+				if (typeof str == "string") div.innerHTML = li;
+				// console.log(div.children)
+				return div;
+			}
+		});
+		var loadNode = document.querySelector("#loading");
+		document.querySelector(".lastestMusic").removeChild(loadNode);
+	}, function () {});
+}, 1000);
 
-  var array = lyric.split('\n');
-  var regex = /^\[(.+)\](.*)/;
-  array = array.map(function (string, index) {
-    var matches = string.match(regex);
-    // console.log(matches)
-    if (!matches) return;
-    return { time: matches[1], words: matches[2] };
-  });
-  // console.log(array)
-  var lyricNode = document.querySelector('.lines');
-  array.map(function (object) {
-    // console.log(object)
-    if (!object) return;
-    var lyricP = document.createElement('p');
-    var lyricText = document.createTextNode(object.words);
-    lyricP.setAttribute('data-time', object.time);
-    lyricP.appendChild(lyricText);
-    lyricNode.appendChild(lyricP);
-  });
-  // console.log(lyricNode)
-  var audio = document.createElement('audio');
-  var discNode = document.querySelector('.disc');
-  var coverAnimation = document.querySelector('.cover');
-  audio.src = "//ounk79p86.bkt.clouddn.com/C400002wJJpU0kLcQZ.m4a";
-  audio.oncanplay = function () {
-    audio.play();
-    discNode.className += " playing";
-  };
-
-  var play = document.querySelector('.icon-play');
-  play.onclick = function () {
-    console.log("点到我了");
-    audio.play();
-    discNode.className += " playing";
-  };
-  var pause = document.querySelector('.icon-pause');
-  pause.onclick = function () {
-    console.log("点到我了");
-    audio.pause();
-    discNode.classList.remove('playing');
-  };
-  //*********
-  var playbtn = document.querySelector('.play');
-  playbtn.onclick = function (e) {
-    audio.play();
-    discNode.className += " playing";
-    e.stopPropagation();
-  };
-  var pausebtn = document.querySelector('.pause');
-  pausebtn.onclick = function (e) {
-    audio.pause();
-    discNode.classList.remove('playing');
-    e.stopPropagation();
-  };
-  //*********
-}, function (error) {
-  console.error('出错了', error);
-});
-
-// let xhr = new XMLHttpRequest()
-// xhr.open("get","../src/js/lib/lyric.json")
-// xhr.onreadystatechange = function() {
-// 	if (xhr.readyState == 4) {
-// 		if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-// 			// console.log(xhr.responseText)
-// 			lyric
-// 		}
-// 	}
-// }
-
-// xhr.send()
+/*
+<li>
+    <a href="">
+			<h3>歌曲名9</h3>
+			<p>
+      <svg class="sq">
+        <use xlink:href="#icon-sq"></use>
+      </svg>
+    演唱者9-专辑9</p>
+      <svg class="playCl">
+        <use xlink:href="#icon-play-circle"></use>
+    </svg>
+    </a>
+</li>
+*/
 
 /***/ }),
 /* 2 */
@@ -254,6 +216,7 @@ getJSON("../src/js/lib/lyric.json").then(function (json) {
 __webpack_require__(3);
 __webpack_require__(2);
 __webpack_require__(0);
+// require('mod/jqsong.js');
 __webpack_require__(1);
 
 /***/ })
