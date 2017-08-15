@@ -21,8 +21,6 @@
   flex-direction: column;
   height: 100vh;
   overflow-x: hidden;
-  background: transparent url(http://p3.music.126.net/iMEpR_WRMEZv48G3DB6sMw==/18225504742568899.jpg) no-repeat center;
-  background-size: cover;
 }
 .page .disc-container {
   position: relative;
@@ -136,7 +134,7 @@
   border: 1px solid;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 0;
 }
 ul,

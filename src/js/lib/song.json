@@ -4,69 +4,89 @@
 		"url":"http://ounk79p86.bkt.clouddn.com/Strip%20That%20Down.mp3",
 		"name":"Strip That Down",
 		"author":"Liam Payne / Quavo",
-		"info":"Strip That Down"
+		"info":"Strip That Down",
+		"cover":"http://ounk79p86.bkt.clouddn.com/cStrip%20That%20Down.webp",
+		"filter":"http://ounk79p86.bkt.clouddn.com/bStrip%20That%20Down"
 	},
 	{	
 		"id":"2",
 		"url":"http://ounk79p86.bkt.clouddn.com/C400002wJJpU0kLcQZ.m4a",
 		"name":"Despacito",
 		"author":"Luis Fonsi / Daddy Yankee / Justin Bieber",
-		"info":"-"
+		"info":"-",
+		"cover":"http://ounk79p86.bkt.clouddn.com/cDespacito.webp",
+		"filter":"http://ounk79p86.bkt.clouddn.com/bDespacito"
 	},
 	{	
 		"id":"3",
 		"url":"http://ounk79p86.bkt.clouddn.com/We%20Will%20Rock%20You.mp3",
 		"name":"We Will Rock You",
 		"author":"Queen",
-		"info":"Queen Rocks"
+		"info":"Queen Rocks",
+		"cover":"http://ounk79p86.bkt.clouddn.com/cWe%20Will%20Rock%20You.webp",
+		"filter":"http://ounk79p86.bkt.clouddn.com/bWe%20Will%20Rock%20You"
 	},
 	{	
 		"id":"4",
 		"url":"http://ounk79p86.bkt.clouddn.com/Versace%20On%20The%20Floor.mp3",
 		"name":"Versace On The Floor",
 		"author":"Bruno Mars",
-		"info":"24K Magic"
+		"info":"24K Magic",
+		"cover":"http://ounk79p86.bkt.clouddn.com/cVersace%20On%20The%20Floor.webp",
+		"filter":"http://ounk79p86.bkt.clouddn.com/bVersace%20On%20The%20Floor"
 	},
 	{	
 		"id":"5",
 		"url":"http://ounk79p86.bkt.clouddn.com/The%20Show.mp3",
 		"name":"The Show",
 		"author":"Lenka",
-		"info":"Bravo Hits Vol.66"
+		"info":"Bravo Hits Vol.66",
+		"cover":"http://ounk79p86.bkt.clouddn.com/cThe%20Show.webp",
+		"filter":"http://ounk79p86.bkt.clouddn.com/bThe%20Show"
 	},
 	{	
 		"id":"6",
 		"url":"http://ounk79p86.bkt.clouddn.com/Rap%20God%20%20%0D%0A.mp3",
 		"name":"Rap God",
 		"author":"Eminem",
-		"info":"The Marshall Mathers LP 2 (Deluxe)"
+		"info":"The Marshall Mathers LP 2 (Deluxe)",
+		"cover":"http://ounk79p86.bkt.clouddn.com/cRap%20God.webp",
+		"filter":"http://ounk79p86.bkt.clouddn.com/bRap%20God"
 	},
 	{	
 		"id":"7",
 		"url":"http://ounk79p86.bkt.clouddn.com/%E5%91%8A%E7%99%BD%E6%B0%94%E7%90%83.mp3",
 		"name":"告白气球",
 		"author":"周杰伦",
-		"info":"床边故事"
+		"info":"床边故事",
+		"cover":"http://ounk79p86.bkt.clouddn.com/c%E5%91%8A%E7%99%BD%E6%B0%94%E7%90%83.webp",
+		"filter":"http://ounk79p86.bkt.clouddn.com/b%E5%91%8A%E7%99%BD%E6%B0%94%E7%90%83"
 	},
 	{	
 		"id":"8",
 		"url":" ",
 		"name":"I Just Wanna Run",
 		"author":"The Downtown Fiction",
-		"info":"Best I Never Had"
+		"info":"Best I Never Had",
+		"cover":"http://ounk79p86.bkt.clouddn.com/cI%20Just%20Wanna%20Run.webp",
+		"filter":"http://ounk79p86.bkt.clouddn.com/bI%20Just%20Wanna%20Run"
 	},
 	{	
 		"id":"9",
 		"url":"http://ounk79p86.bkt.clouddn.com/Take%20Me%20to%20Your%20Heart%20%20%0D%0A.mp3",
 		"name":"Take Me to Your Heart",
 		"author":"Michael Learns To Rock",
-		"info":"That's WhyYou Go Away"
+		"info":"That's WhyYou Go Away",
+		"cover":"http://ounk79p86.bkt.clouddn.com/cTake%20Me%20to%20Your%20Heart.jpg",
+		"filter":"http://ounk79p86.bkt.clouddn.com/bShape%20of%20You"
 	},
 	{	
 		"id":"10",
 		"url":"http://ounk79p86.bkt.clouddn.com/Shape%20of%20You.mp3",
 		"name":"Shape of You",
 		"author":"Ed Sheeran",
-		"info":"÷ (Deluxe)"
+		"info":"÷ (Deluxe)",
+		"cover":"http://ounk79p86.bkt.clouddn.com/cShape%20of%20You.webp",
+		"filter":"http://ounk79p86.bkt.clouddn.com/bShape%20of%20You"
 	}
 ]

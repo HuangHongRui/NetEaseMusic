@@ -5,7 +5,9 @@ $(function(){
 	$.get('../src/js/lib/song.json').then(function(response){
 		let songs = response
 		let song = songs.filter(s => s.id == id)[0]
-		let {url} = song
+		let {url, cover, filter} = song
+		$('.cover').attr("src",cover)
+		$('.page').css({"background":"url("+filter+") no-repeat","background-size": "cover", "transform-origin": "center top","background-position": "50%","transition": "opacity .3s linear"})
 		let audio = document.createElement('audio')
 		audio.src = url
 		audio.oncanplay = function(){
