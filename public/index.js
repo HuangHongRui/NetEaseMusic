@@ -237,11 +237,22 @@ getJSON("../src/js/lib/song.json").then(function (response) {
       name = song.name,
       author = song.author;
 
+  initText(name, author, lyric, url, cover, filter);
+});
+
+function initText(name, author, lyric, url, cover, filter) {
+  var musicName = document.querySelector('.musicName');
+  musicName.innerHTML = name + " - <span>" + author + "</span>";
+  document.querySelector('.cover').setAttribute("src", cover);
+  var page = document.querySelector('.page');
+  page.style.cssText = "background:url(" + filter + ") no-repeat; background-size: cover; transform-origin:center top; background-position:50%; transition : opacity .3s linear";
+  autoPlay(url);
+  initLyric(lyric);
+}
+
+function autoPlay(url) {
   var audio = document.createElement('audio');
   var discNode = document.querySelector('.disc');
-  document.querySelector('.cover').setAttribute("src", cover);
-  var a = document.querySelector('.page');
-  a.style.cssText = "background:url(" + filter + ") no-repeat; background-size: cover; transform-origin:center top; background-position:50%; transition : opacity .3s linear";
   audio.src = url;
   audio.oncanplay = function () {
     audio.play();
@@ -250,13 +261,13 @@ getJSON("../src/js/lib/song.json").then(function (response) {
 
   var play = document.querySelector('.icon-play');
   play.onclick = function () {
-    console.log("点到我了");
+    // console.log("点到我了")
     audio.play();
     discNode.className += " playing";
   };
   var pause = document.querySelector('.icon-pause');
   pause.onclick = function () {
-    console.log("点到我了");
+    // console.log("点到我了")
     audio.pause();
     discNode.classList.remove('playing');
   };
@@ -274,8 +285,85 @@ getJSON("../src/js/lib/song.json").then(function (response) {
     e.stopPropagation();
   };
   //*********
-  var musicName = document.querySelector('.musicName');
-  musicName.innerHTML = name + " - <span>" + author + "</span>";
+
+  setInterval(function () {
+    var linesNode = document.querySelector('.lines');
+    var seconds = audio.currentTime;
+    var munites = ~~(seconds / 60);
+    var left = seconds - munites * 60;
+    var time = pad(munites) + ":" + pad(left);
+    var lines = linesNode.children;
+    var whichLine = void 0;
+
+    for (var i = 0; i < lines.length; i++) {
+      var currentLineTime = lines[i].getAttribute('data-time');
+      var nextLineTime = void 0;
+      if (lines[i + 1]) {
+        nextLineTime = lines[i + 1].getAttribute('data-time');
+      }
+      if (lines[i + 1] !== undefined && currentLineTime < time && nextLineTime > time) {
+        whichLine = lines[i];
+        // console.log(whichLine) 
+        break;
+      }
+    }
+    if (whichLine) {
+
+      whichLine.classList.add('active');
+      if (whichLine.previousElementSibling) {
+        whichLine.previousElementSibling.classList.remove('active');
+      }
+
+      var lyricHeight = document.querySelector('.lyric').clientHeight / 3;
+
+      var top = getOffset1(whichLine).top;
+      var linesTop = getOffset1(linesNode).top;
+      // let delta = top - linesTop - lyricHeight
+      // console.log(top, linesTop, lyricHeight, delta)
+      // linesNode.setAttribute("style",`transform : translateY(-${delta}px)`)
+
+
+      // $(whichLine).addClass('active').prev().removeClass('active')
+
+      // let top = $(whichLine).offset().top
+      // let linesTop = $('.lines').offset().top
+
+      // console.log(top1,":分111开:",top)
+      // console.log(linesTop1,":分222开:",linesTop)
+
+      var delta = top - linesTop - lyricHeight;
+      linesNode.setAttribute("style", "transform : translateY(-" + delta + "px)");
+    }
+  }, 300);
+}
+
+var getOffset1 = function getOffset1(elem) {
+  var docElem = document.documentElement;
+  var box = elem.getBoundingClientRect();
+  return {
+    top: box.top + docElem.scrollTop,
+    left: box.left + docElem.scrollLeft
+  };
+};
+
+function getOffset(Node, offset) {
+  if (!offset) {
+    offset = {};
+    offset.top = 0;
+    offset.left = 0;
+  }
+  if (Node == document.body) {
+    return offset;
+  }
+  offset.top += Node.offsetTop;offset.left += Node.offsetLeft;
+  return getOffset(Node.parentNode, offset);
+}
+
+function pad(num) {
+  return num > 10 ? num + '' : '0' + num;
+}
+
+function initLyric(lyric) {
   var array = lyric.split('\n');
   var regex = /^\[(.+)\](.*)/;
   array = array.map(function (string, index) {
@@ -291,11 +379,27 @@ getJSON("../src/js/lib/song.json").then(function (response) {
     if (!object) return;
     var lyricP = document.createElement('p');
     var lyricText = document.createTextNode(object.words);
+
     lyricP.setAttribute('data-time', object.time);
     lyricP.appendChild(lyricText);
     lyricNode.appendChild(lyricP);
+    var allP = lyricNode.children;
+    for (var i in allP) {
+      if (allP[i].innerText === "") {
+        allP[i].remove();
+      }
+    }
   });
-});
+}
+
+/*
+for (var i in ac) {
+  if (ac[i].innerText === ""){
+  ac[i].remove()
+}
+}
+
+*/
 
 // getJSON("../src/js/lib/lyric.json").then(function(json) {
 //   let {lyric} = json

@@ -100,17 +100,22 @@
   color: rgba(255, 255, 255, 0.6);
 }
 .page .song-description .lyric {
-  height: 26vw;
+  height: 27vw;
   overflow: hidden;
 }
 .page .song-description .lyric .lines {
-  transform: translateY(0px);
+  transition: transform 0.3s;
 }
 .page .song-description .lyric p {
-  line-height: 24px;
+  line-height: 9vw;
   font-size: 3.88vw;
   font-family: Helvetica, sans-serif;
-  padding: 1vw 0;
+  color: #ccc;
+}
+.page .song-description .lyric .active {
+  color: #fff;
+  font-size: 4vw;
+  font-weight: 600;
 }
 .page .links {
   display: flex;

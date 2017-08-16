@@ -8,3 +8,5 @@
 3. 获取&播放歌曲｜按键切换播放&停止歌曲&动画｜背遮｜歌词微调.
 4. 在动画光盘上添加 播放&暂停功能 | SVG图片.
 5. 设置ｉｎｄｅｘ 主页等布局．
+6. index yemian gequ de tiaozhuan 
+7. song yemian de geci ^& info tongbu 

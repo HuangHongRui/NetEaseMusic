@@ -27,9 +27,10 @@
 		h1{ font-size: 5vw; color: #fefefe; 
 			span {font-size: 4vw; color: hsla(0,0%,100%,.6)};
 		}
-		.lyric{ height: 26vw; overflow: hidden;
-			.lines {transform: translateY(0px)}
-			p { line-height: 24px; font-size: 3.88vw; font-family: Helvetica,sans-serif; padding: 1vw 0;}
+		.lyric{ height: 27vw; overflow: hidden;
+			.lines {transition: transform 0.3s;}//transform: translateY(0px)
+			p { line-height: 9vw; font-size: 3.88vw; font-family: Helvetica,sans-serif; color: #ccc;}
+			.active { color:#fff; font-size: 4vw; font-weight: 600;}
 		}
 	}
 
