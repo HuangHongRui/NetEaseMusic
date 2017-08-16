@@ -21,6 +21,7 @@
   flex-direction: column;
   height: 100vh;
   overflow-x: hidden;
+  background: transparent url(bRapGod_1a2CKT-.jpeg) no-repeat center;
 }
 .page .disc-container {
   position: relative;
