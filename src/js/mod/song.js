@@ -25,7 +25,7 @@ getJSON("../src/js/lib/song.json").then(function(response){
   let id = parseInt(location.search.match(/\bid=([^&]*)/)[1],10)
   let songs = response
   let song = songs.filter(s=>s.id == id)[0]
-  let {url, cover, filter} = song
+  let {url, cover, filter, lyric, name, author} = song
   let audio = document.createElement('audio')
   let discNode = document.querySelector('.disc')
   document.querySelector('.cover').setAttribute("src", cover);
@@ -63,34 +63,56 @@ getJSON("../src/js/lib/song.json").then(function(response){
     e.stopPropagation()
   }
 //*********
-})
-
-getJSON("../src/js/lib/lyric.json").then(function(json) {
-  let {lyric} = json
+  let musicName = document.querySelector('.musicName')
+  musicName.innerHTML=`${name} - <span>${author}</span>`
   let array = lyric.split('\n')
   let regex = /^\[(.+)\](.*)/
   array = array.map(function(string, index) {
-  	let matches = string.match(regex)
-  	// console.log(matches)
-  	if (!matches) return
-  	return {time: matches[1], words: matches[2]}
+    let matches = string.match(regex)
+    // console.log(matches)
+    if (!matches) return
+    return {time: matches[1], words: matches[2]}
   })
   // console.log(array)
   let lyricNode = document.querySelector('.lines')
   array.map(function(object){
-  	// console.log(object)
-  	if(!object) return
-  	let lyricP = document.createElement('p')
-  	let lyricText = document.createTextNode(object.words)
-  	lyricP.setAttribute('data-time', object.time)
-  	lyricP.appendChild(lyricText)
-  	lyricNode.appendChild(lyricP)
+    // console.log(object)
+    if(!object) return
+    let lyricP = document.createElement('p')
+    let lyricText = document.createTextNode(object.words)
+    lyricP.setAttribute('data-time', object.time)
+    lyricP.appendChild(lyricText)
+    lyricNode.appendChild(lyricP)
   })
-  // console.log(lyricNode)
 
-}, function(error) {
-  console.error('出错了', error);
-});
+})
+
+// getJSON("../src/js/lib/lyric.json").then(function(json) {
+//   let {lyric} = json
+//   let array = lyric.split('\n')
+//   let regex = /^\[(.+)\](.*)/
+//   array = array.map(function(string, index) {
+//   	let matches = string.match(regex)
+//   	// console.log(matches)
+//   	if (!matches) return
+//   	return {time: matches[1], words: matches[2]}
+//   })
+//   // console.log(array)
+//   let lyricNode = document.querySelector('.lines')
+//   array.map(function(object){
+//   	// console.log(object)
+//   	if(!object) return
+//   	let lyricP = document.createElement('p')
+//   	let lyricText = document.createTextNode(object.words)
+//   	lyricP.setAttribute('data-time', object.time)
+//   	lyricP.appendChild(lyricText)
+//   	lyricNode.appendChild(lyricP)
+//   })
+//   // console.log(lyricNode)
+
+// }, function(error) {
+//   console.error('出错了', error);
+// });
 
 
 

@@ -161,7 +161,6 @@ setTimeout(function () {
 	getJSON('../src/js/lib/song.json').then(function (json) {
 		var items = json;
 		items.forEach(function (ele) {
-			// console.log(ele.id)
 			var judge = Math.random() > 0.5 ? 'sq' : '';
 			var li = "\n\t\t<a href=\"../../../bin/song.html?id=" + ele.id + "\">\n\t\t<h3>" + ele.name + "</h3>\n\t\t<p>\n\t\t<svg class=\"" + judge + " hide\">\n\t\t<use xlink:href=\"#icon-sq\"></use>\n\t\t</svg>\n\t\t" + ele.author + "-" + ele.info + "</p>\n\t\t<svg class=\"playCl\">\n\t\t<use xlink:href=\"#icon-play-circle\"></use>\n\t\t</svg>\n\t\t</a>\n\t\t";
 			var liDom = parseToDom(li);
@@ -169,13 +168,14 @@ setTimeout(function () {
 			function parseToDom(str) {
 				var div = document.createElement("li");
 				if (typeof str == "string") div.innerHTML = li;
-				// console.log(div.children)
 				return div;
 			}
 		});
 		var loadNode = document.querySelector("#loading");
 		document.querySelector(".lastestMusic").removeChild(loadNode);
-	}, function () {});
+	}, function () {
+		console.log('读取失败');
+	});
 }, 1000);
 
 /*
@@ -232,7 +232,10 @@ getJSON("../src/js/lib/song.json").then(function (response) {
   })[0];
   var url = song.url,
       cover = song.cover,
-      filter = song.filter;
+      filter = song.filter,
+      lyric = song.lyric,
+      name = song.name,
+      author = song.author;
 
   var audio = document.createElement('audio');
   var discNode = document.querySelector('.disc');
@@ -271,11 +274,8 @@ getJSON("../src/js/lib/song.json").then(function (response) {
     e.stopPropagation();
   };
   //*********
-});
-
-getJSON("../src/js/lib/lyric.json").then(function (json) {
-  var lyric = json.lyric;
-
+  var musicName = document.querySelector('.musicName');
+  musicName.innerHTML = name + " - <span>" + author + "</span>";
   var array = lyric.split('\n');
   var regex = /^\[(.+)\](.*)/;
   array = array.map(function (string, index) {
@@ -295,10 +295,35 @@ getJSON("../src/js/lib/lyric.json").then(function (json) {
     lyricP.appendChild(lyricText);
     lyricNode.appendChild(lyricP);
   });
-  // console.log(lyricNode)
-}, function (error) {
-  console.error('出错了', error);
 });
+
+// getJSON("../src/js/lib/lyric.json").then(function(json) {
+//   let {lyric} = json
+//   let array = lyric.split('\n')
+//   let regex = /^\[(.+)\](.*)/
+//   array = array.map(function(string, index) {
+//   	let matches = string.match(regex)
+//   	// console.log(matches)
+//   	if (!matches) return
+//   	return {time: matches[1], words: matches[2]}
+//   })
+//   // console.log(array)
+//   let lyricNode = document.querySelector('.lines')
+//   array.map(function(object){
+//   	// console.log(object)
+//   	if(!object) return
+//   	let lyricP = document.createElement('p')
+//   	let lyricText = document.createTextNode(object.words)
+//   	lyricP.setAttribute('data-time', object.time)
+//   	lyricP.appendChild(lyricText)
+//   	lyricNode.appendChild(lyricP)
+//   })
+//   // console.log(lyricNode)
+
+// }, function(error) {
+//   console.error('出错了', error);
+// });
+
 
 // let xhr = new XMLHttpRequest()
 // xhr.open("get","../src/js/lib/lyric.json")

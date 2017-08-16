@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -132,72 +132,6 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-
-var getJSON = function getJSON(url) {
-	var promise = new Promise(function (resolve, reject) {
-		var client = new XMLHttpRequest();
-		client.open('GET', url);
-		client.onreadystatechange = handler;
-		client.responseType = "json";
-		client.setRequestHeader("Accept", "application/json");
-		client.send();
-
-		function handler() {
-			if (this.readyState !== 4) {
-				return;
-			}
-			if (this.status === 200) {
-				resolve(this.response);
-			} else {
-				reject(new Error(this.statusText));
-			}
-		};
-	});
-	return promise;
-};
-
-setTimeout(function () {
-	getJSON('../src/js/lib/song.json').then(function (json) {
-		var items = json;
-		items.forEach(function (ele) {
-			// console.log(ele.id)
-			var li = "\n\t\t<a href=\"../../../bin/song.html?id=" + ele.id + "\">\n\t\t<h3>" + ele.name + "</h3>\n\t\t<p>\u6F14\u5531\u8005-\u4E13\u8F91</p>\n\t\t<svg class=\"playCl\">\n\t\t<use xlink:href=\"#icon-play-circle\"></use>\n\t\t</svg>\n\t\t</a>\n\t\t";
-			var liDom = parseToDom(li);
-			document.querySelector("#songItems").appendChild(liDom);
-			function parseToDom(str) {
-				var div = document.createElement("li");
-				if (typeof str == "string") div.innerHTML = li;
-				console.log(div.children);
-				return div;
-			}
-		});
-		var loadNode = document.querySelector("#loading");
-		document.querySelector(".lastestMusic").removeChild(loadNode);
-	}, function () {});
-}, 1000);
-
-/*
-<li>
-    <a href="">
-			<h3>歌曲名9</h3>
-			<p>
-      <svg class="sq">
-        <use xlink:href="#icon-sq"></use>
-      </svg>
-    演唱者9-专辑9</p>
-      <svg class="playCl">
-        <use xlink:href="#icon-play-circle"></use>
-    </svg>
-    </a>
-</li>
-*/
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 /* WEBPACK VAR INJECTION */(function($) {
 
 $(function () {
@@ -209,8 +143,14 @@ $(function () {
 		var song = songs.filter(function (s) {
 			return s.id == id;
 		})[0];
-		var url = song.url;
+		var url = song.url,
+		    cover = song.cover,
+		    filter = song.filter,
+		    lyric = song.lyric;
 
+		console.log(lyric);
+		$('.cover').attr("src", cover);
+		$('.page').css({ "background": "url(" + filter + ") no-repeat", "background-size": "cover", "transform-origin": "center top", "background-position": "50%", "transition": "opacity .3s linear" });
 		var audio = document.createElement('audio');
 		audio.src = url;
 		audio.oncanplay = function () {
@@ -225,6 +165,8 @@ $(function () {
 			audio.play();
 			$('.disc').addClass('playing');
 		});
+		console.log(lyric);
+		var array = lyric.split('\n');
 	});
 
 	$.get('../src/js/lib/lyric.json').then(function (object) {
@@ -250,7 +192,13 @@ $(function () {
 		});
 	});
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 3 */
@@ -260,25 +208,19 @@ $(function () {
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(4);
 __webpack_require__(3);
-__webpack_require__(0);
 __webpack_require__(2);
+__webpack_require__(0);
 __webpack_require__(1);
+// require('mod/index.js');
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2480,7 +2422,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     });
   }), n.fn.size = function () {
     return this.length;
-  }, n.fn.andSelf = n.fn.addBack, "function" == "function" && __webpack_require__(7) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+  }, n.fn.andSelf = n.fn.addBack, "function" == "function" && __webpack_require__(6) && !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
     return n;
   }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));var Kb = a.jQuery,
@@ -2488,10 +2430,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return a.$ === n && (a.$ = Lb), b && a.jQuery === n && (a.jQuery = Kb), n;
   }, (typeof b === "undefined" ? "undefined" : _typeof(b)) === U && (a.jQuery = a.$ = n), n;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)(module)))
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -2500,7 +2442,7 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {

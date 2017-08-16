@@ -25,7 +25,6 @@ setTimeout(function(){
 	getJSON('../src/js/lib/song.json').then(function(json){
 		let items = json
 		items.forEach( (ele) => {
-		// console.log(ele.id)
 		let judge = Math.random()>0.5?'sq':''
 		let li = `
 		<a href="../../../bin/song.html?id=${ele.id}">
@@ -46,7 +45,6 @@ setTimeout(function(){
 			let div = document.createElement("li")
 			if (typeof str == "string")
 				div.innerHTML = li
-			// console.log(div.children)
 			return div
 		}
 	});
@@ -54,7 +52,7 @@ setTimeout(function(){
 		document.querySelector(".lastestMusic").removeChild(loadNode)
 
 	}, function(){
-
+		console.log('读取失败')
 	})
 },1000)
 

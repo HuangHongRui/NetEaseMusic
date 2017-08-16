@@ -88,13 +88,18 @@
   line-height: 2;
   margin-top: 20px;
   z-index: 1;
+  padding: 0vw 8.8vw;
 }
 .page .song-description h1 {
-  font-size: 18px;
-  color: #fff;
+  font-size: 5vw;
+  color: #fefefe;
+}
+.page .song-description h1 span {
+  font-size: 4vw;
+  color: rgba(255, 255, 255, 0.6);
 }
 .page .song-description .lyric {
-  height: 96px;
+  height: 26vw;
   overflow: hidden;
 }
 .page .song-description .lyric .lines {
@@ -102,7 +107,9 @@
 }
 .page .song-description .lyric p {
   line-height: 24px;
-  font-size: 14px;
+  font-size: 3.88vw;
+  font-family: Helvetica, sans-serif;
+  padding: 1vw 0;
 }
 .page .links {
   display: flex;
@@ -285,6 +292,7 @@ a {
 .lastestMusic ol li h3 {
   font-size: 4.6vw;
   line-height: 7vw;
+  color: #333;
 }
 .lastestMusic ol li p {
   font-size: 4vw;
