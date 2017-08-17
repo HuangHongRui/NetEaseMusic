@@ -1,11 +1,11 @@
 # NetEaseMusic
 :musical_note:  网易云音乐 | NetEaseMusic | 乐迷必备  :tada:
 
-###[推荐]二维码扫描预览: 
+### [推荐]二维码扫描预览: 
 
 ![手机预览](http://music.luckyman.xyz/src/img/bin.png)
 
-###预览链接:[电脑预览需开发者工具转为手机端]: 
+### 预览链接:[电脑预览需开发者工具转为手机端]: 
 
 - http://music.luckyman.xyz/bin/
 

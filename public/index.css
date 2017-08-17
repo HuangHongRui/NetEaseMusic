@@ -30,6 +30,7 @@
   width: 26vw;
   position: absolute;
   left: 46vw;
+  z-index: 1;
 }
 .page .disc-container .disc {
   display: flex;
@@ -237,8 +238,12 @@ a {
   left: -1.5vw;
   right: -1.5vw;
 }
-.playlists {
+.tabContent > li {
+  display: none;
   margin-top: 31.5vw;
+}
+.tabContent > li.active {
+  display: block;
 }
 .playlists > ul {
   display: flex;

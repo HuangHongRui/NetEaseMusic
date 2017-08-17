@@ -21,7 +21,12 @@ a {text-decoration: none; color: inherit;}
 	}
 }
 
-.playlists { margin-top: 31.5vw; 
+.tabContent {
+	>li {display: none; margin-top: 31.5vw; }
+	>li.active {display: block}
+}
+
+.playlists { //margin-top: 31.5vw; 
 	>ul{ display: flex; flex-wrap: wrap; justify-content: space-between;
 		li { width: calc(33.3333333% - 0.5vw); margin-bottom: 4vw; position: relative;};
 		.listen {width: 3.2vw; height: 3.2vw; fill: #fff;}
