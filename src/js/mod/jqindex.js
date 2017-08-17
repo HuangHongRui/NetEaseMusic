@@ -36,6 +36,7 @@ $(function() {
 		$('.tabContent >li').eq(index).addClass('active')
 			.siblings().removeClass('active')
 	})
+	
 	$('.siteNav').on('tabChange',function(e, index) {
 		let $li = $('.tabContent >li').eq(index)
 		if ($li.attr('data-downloaded') === 'yeah') return
@@ -95,7 +96,6 @@ $(function() {
 			},(Math.random()*1000+200))
 		})
 	}
-	window.search = search
 })
 
 
