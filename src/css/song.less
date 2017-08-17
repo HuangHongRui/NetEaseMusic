@@ -7,8 +7,8 @@
 	background: transparent url(../img/bRapGod.jpeg) no-repeat center;
 	.disc-container { position: relative;
 		.pointer { width: 26vw; position: absolute; left: 46vw; };
-		.disc{ display: flex; justify-content: center; align-items: center; margin-top: 18vw;
-			.icon-wrapper {position: absolute; z-index: 2; display: flex; width: 20vw; height: 20vw; justify-content: center; align-items: center; border: solid 1px #fff;  background: rgba(0, 0, 0, 0.5); border-radius: 50%;
+		.disc{ display: flex; justify-content: center; align-items: center; margin-top: 18vw; position: relative;
+			.icon-wrapper {position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); z-index: 2; display: flex; width: 20vw; height: 20vw; justify-content: center; align-items: center; border: solid 1px #fff;  background: rgba(0, 0, 0, 0.5); border-radius: 50%;
 				.icon { width: 10vw; fill: #fff; }
 			}
 			.ring { width: 80vw; };
@@ -17,7 +17,7 @@
 		}
 		// .cover { width: 50vw; position: absolute; border-radius: 50%; animation-play-state: paused;}
 		.playing .light,	
-		.playing .cover { animation: circle 15s infinite linear; animation-play-state: running;}
+		.playing .cover {animation: circle 15s infinite linear; animation-play-state: running;}
 		.icon-pause	{ display: none;}
 		.playing .icon-play { display: none;}
 		.playing .icon-pause { display: block;}
