@@ -58,10 +58,11 @@ ol.songItems{padding-left: 2.8vw;
 			}
 		}
 		#output {
-			.searchResult { color: #507daf; line-height: 5vw; font-size: 4vw; padding: 4vw 3vw; border-bottom: 1px solid rgba(0,0,0,0.1);}
+			.searchResult { color: #507daf; line-height: 5vw; font-size: 4vw; padding: 4vw 3vw; border-bottom: 1px solid rgba(0,0,0,0.1); width: 100vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-break: normal;}
 			ol>li {margin-left: 6vw; line-height: 12vw; font-size: 4vw;
 				.svgSearch {width: 5vw; height: 5vw;}
 			}
+			.noResult {margin-left: 50%; transform: translateX(-25%);line-height: 20vw;} 
 		}
 	}
 	>li.active {display: block}

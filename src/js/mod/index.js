@@ -115,77 +115,106 @@ document.querySelector('.hotfoot span').addEventListener('click', function(){
 		})
 	}
 
-	let clockLock = undefined
-	document.querySelector('#searchMusic').addEventListener('input', function(e){
-		let inputNode = e.target
-		let value = inputNode.value.trim()
-		let output = document.querySelector('#output')
-		let label = document.querySelector('label.searchName')
-		let labelParent = document.querySelector('#searchMusic input')
-		function clearValue() {
-			labelParent.addEventListener('blur', function(){
-				labelParent.value = ''
-				label.style.display = 'block'
-			})
-		}
-		if( value === '') return 
-		if(label){label.style.display = 'none'}
-		if (clockLock) {
-			clearTimeout(clockLock)
-		}
-		clockLock = setTimeout(function(){
-			search(value).then((result)=>{
-				if (result.length !== 0){
-					output.innerText = result.map((arg)=>arg.name).join('\n')
-					if(label) clearValue()
-				}else{
-					output.innerText = '抱歉, 没有搜索到.'
-					if(label) clearValue()
-				}
-			})
-		})
-	})
+let clockLock = undefined
+document.querySelector('#searchMusic').addEventListener('input', function(e){
+	let inputNode = e.target
+	let value = inputNode.value.trim()
+	let output = document.querySelector('#output')
+	let label = document.querySelector('label.searchName')
+	let labelParent = document.querySelector('#searchMusic input')
+	let hotSearch = document.querySelector('.hotSearch')
+	let svgClose = document.querySelector('.svgClose')
+	let songItems = document.querySelector("#output .songItems")
+	let noResult = document.querySelector("#output .noResult")
+	let searchResult = document.querySelector('.searchResult span')
+	let close = document.querySelectorAll('.hotSearch .close')
 
-	function search(keyword){
-		return new Promise((resolve, reject) => {
-			// console.log('搜索' + keyword)
-			var database = [
-				{"id":"1", "name":"Strip That Down" },
-				{"id":"2", "name":"Despacito" },
-				{"id":"3", "name":"We Will Rock You" },
-				{"id":"4", "name":"Versace On The Floor" },
-				{"id":"5", "name":"The Show" },
-				{"id":"6", "name":"Rap God" },
-				{"id":"7", "name":"告白气球" },
-				{"id":"8", "name":"I Just Wanna Run" },
-				{"id":"9", "name":"Take Me to Your Heart" },
-				{"id":"10", "name":"Shape of You" }
-			]
-			let result = database.filter(function(item){
-				// console.log(item)
-				return item.name.indexOf(keyword) >= 0
-			})
-			setTimeout(function(){
-				// console.log('搜索结果' + keyword)
-				// console.log(resolve(result))
-				resolve(result)
-			},(Math.random()*1000+200))
-		})
+	// console.log(labelParent.value)
+	if(labelParent.value === ''){
+		output.classList.add('userHide')
+		svgClose.classList.add('userHide')
+		label.classList.remove('userHide')
+		hotSearch.classList.remove('userHide')
+	}else if(labelParent.value !== ''){
+		label.classList.add('userHide')
+		hotSearch.classList.add('userHide')
+		output.classList.remove('userHide')
+		svgClose.classList.remove('userHide')
 	}
 
+	svgClose.addEventListener('click', function(e){
+		labelParent.value = ''
+		output.classList.add('userHide')
+		svgClose.classList.add('userHide')
+		label.classList.remove('userHide')
+		hotSearch.classList.remove('userHide')
+	})
 
-/*
-<li>
-    <a href="">
-			<h3>歌曲名9</h3>
-			<p>
-      <svg class="sq">
-        <use xlink:href="#icon-sq"></use>
-      </svg>
-    演唱者9-专辑9</p>
-      <svg class="playCl">
-        <use xlink:href="#icon-play-circle"></use>
-    </svg>
-    </a>
-</li>
-*/
+	// close.forEach(function(e){
+	// 	e.addEventListener('click',function(e){
+	// 	let target = e.currentNode
+	// 	let index = [].indexOf.call(close, target)
+	// 	})
+	// })
+
+	searchResult.innerText = value
+
+	// console.log(value)	
+	if( value === '') return 
+	if (clockLock) {
+		clearTimeout(clockLock)
+		console.log('有,毁了')
+	}
+
+	clockLock = setTimeout(function(){
+		search(value).then((result)=>{
+		if (result.length !== 0){
+		if(songItems)songItems.innerHTML = ''
+		let items = result
+		items.forEach( (ele) => {
+			let li = `
+			<li>
+				<svg class="svgSearch">
+					<use xlink:href="#icon-search"></use>
+				</svg>  
+				<span>${ele.name}</span>
+			</li>
+			`
+			document.querySelector("#output .songItems").innerHTML += li
+			noResult.classList.add('userHide')
+			songItems.classList.remove('userHide')
+		});
+			}else{
+			noResult.classList.remove('userHide')
+			songItems.classList.add('userHide')
+			}
+		})
+	})
+})
+
+function search(keyword){
+	return new Promise((resolve, reject) => {
+		// console.log('搜索' + keyword)
+		var database = [
+			{"id":"1", "name":"Strip That Down" },
+			{"id":"2", "name":"Despacito" },
+			{"id":"3", "name":"We Will Rock You" },
+			{"id":"4", "name":"Versace On The Floor" },
+			{"id":"5", "name":"The Show" },
+			{"id":"6", "name":"Rap God" },
+			{"id":"7", "name":"告白气球" },
+			{"id":"8", "name":"I Just Wanna Run" },
+			{"id":"9", "name":"Take Me to Your Heart" },
+			{"id":"10", "name":"Shape of You" }
+		]
+		let result = database.filter(function(item){
+			// console.log(item)
+			return item.name.indexOf(keyword) >= 0
+		})
+		setTimeout(function(){
+			// console.log('搜索结果' + keyword)
+			// console.log(resolve(result))
+			resolve(result)
+		},(Math.random()*1000+200))
+	})
+}

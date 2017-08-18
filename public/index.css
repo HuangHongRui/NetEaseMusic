@@ -413,6 +413,11 @@ ol.songItems li .time {
   font-size: 4vw;
   padding: 4vw 3vw;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: normal;
 }
 .tabContent > li #output ol > li {
   margin-left: 6vw;
@@ -422,6 +427,11 @@ ol.songItems li .time {
 .tabContent > li #output ol > li .svgSearch {
   width: 5vw;
   height: 5vw;
+}
+.tabContent > li #output .noResult {
+  margin-left: 50%;
+  transform: translateX(-25%);
+  line-height: 20vw;
 }
 .tabContent > li.active {
   display: block;

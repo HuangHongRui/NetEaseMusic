@@ -229,29 +229,64 @@ document.querySelector('#searchMusic').addEventListener('input', function (e) {
 	var output = document.querySelector('#output');
 	var label = document.querySelector('label.searchName');
 	var labelParent = document.querySelector('#searchMusic input');
-	function clearValue() {
-		labelParent.addEventListener('blur', function () {
-			labelParent.value = '';
-			label.style.display = 'block';
-		});
+	var hotSearch = document.querySelector('.hotSearch');
+	var svgClose = document.querySelector('.svgClose');
+	var songItems = document.querySelector("#output .songItems");
+	var noResult = document.querySelector("#output .noResult");
+	var searchResult = document.querySelector('.searchResult span');
+	var close = document.querySelectorAll('.hotSearch .close');
+
+	// console.log(labelParent.value)
+	if (labelParent.value === '') {
+		output.classList.add('userHide');
+		svgClose.classList.add('userHide');
+		label.classList.remove('userHide');
+		hotSearch.classList.remove('userHide');
+	} else if (labelParent.value !== '') {
+		label.classList.add('userHide');
+		hotSearch.classList.add('userHide');
+		output.classList.remove('userHide');
+		svgClose.classList.remove('userHide');
 	}
+
+	svgClose.addEventListener('click', function (e) {
+		labelParent.value = '';
+		output.classList.add('userHide');
+		svgClose.classList.add('userHide');
+		label.classList.remove('userHide');
+		hotSearch.classList.remove('userHide');
+	});
+
+	// close.forEach(function(e){
+	// 	e.addEventListener('click',function(e){
+	// 	let target = e.currentNode
+	// 	let index = [].indexOf.call(close, target)
+	// 	})
+	// })
+
+	searchResult.innerText = value;
+
+	// console.log(value)	
 	if (value === '') return;
-	if (label) {
-		label.style.display = 'none';
-	}
 	if (clockLock) {
 		clearTimeout(clockLock);
+		console.log('有,毁了');
 	}
+
 	clockLock = setTimeout(function () {
 		search(value).then(function (result) {
 			if (result.length !== 0) {
-				output.innerText = result.map(function (arg) {
-					return arg.name;
-				}).join('\n');
-				if (label) clearValue();
+				if (songItems) songItems.innerHTML = '';
+				var items = result;
+				items.forEach(function (ele) {
+					var li = "\n\t\t\t<li>\n\t\t\t\t<svg class=\"svgSearch\">\n\t\t\t\t\t<use xlink:href=\"#icon-search\"></use>\n\t\t\t\t</svg>  \n\t\t\t\t<span>" + ele.name + "</span>\n\t\t\t</li>\n\t\t\t";
+					document.querySelector("#output .songItems").innerHTML += li;
+					noResult.classList.add('userHide');
+					songItems.classList.remove('userHide');
+				});
 			} else {
-				output.innerText = '抱歉, 没有搜索到.';
-				if (label) clearValue();
+				noResult.classList.remove('userHide');
+				songItems.classList.add('userHide');
 			}
 		});
 	});
@@ -272,22 +307,6 @@ function search(keyword) {
 		}, Math.random() * 1000 + 200);
 	});
 }
-
-/*
-<li>
-    <a href="">
-			<h3>歌曲名9</h3>
-			<p>
-      <svg class="sq">
-        <use xlink:href="#icon-sq"></use>
-      </svg>
-    演唱者9-专辑9</p>
-      <svg class="playCl">
-        <use xlink:href="#icon-play-circle"></use>
-    </svg>
-    </a>
-</li>
-*/
 
 /***/ }),
 /* 2 */
