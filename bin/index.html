@@ -145,7 +145,11 @@
             </svg> 
             <input type="text">
             <label class="searchName">搜索歌曲名</label>
+            <svg class="svgClose userHide">
+              <use xlink:href="#icon-c-close"></use>
+            </svg> 
           </div>
+
           <section class="hotSearch">
             <h4>热门搜索</h4>
               <ul class="list">
@@ -173,10 +177,56 @@
                     </svg>
                   </a>
                 </li>
+                <li>
+                  <svg class="time">
+                    <use xlink:href="#icon-time"></use>
+                  </svg>
+                  <a href="">
+                    <h3>搜索</h3>
+                    <svg class="close">
+                      <use xlink:href="#icon-close"></use>
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <svg class="time">
+                    <use xlink:href="#icon-time"></use>
+                  </svg>
+                  <a href="">
+                    <h3>搜索</h3>
+                    <svg class="close">
+                      <use xlink:href="#icon-close"></use>
+                    </svg>
+                  </a>
+                </li>
 
                 </ol>
           </section>
-          <div id="output"></div>
+
+          <div id="output" class="userHide">
+            <h3 class="searchResult">搜索<span>"HAHA"</span></h3>
+            <ol class="songItems">
+              <li>
+                <svg class="svgSearch">
+                  <use xlink:href="#icon-search"></use>
+                </svg>  
+              <span>HAHA</span>
+              </li>
+              <li>
+               <svg class="svgSearch">
+                  <use xlink:href="#icon-search"></use>
+                </svg>  
+              <span>Ariana Grande</span>
+              </li>
+              <li>
+               <svg class="svgSearch">
+                  <use xlink:href="#icon-search"></use>
+                </svg>  
+              <span>Ariana Grande</span>
+              </li>
+            </ol>
+          </div>
+
       </li>
     </ol>
 

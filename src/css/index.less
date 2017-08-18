@@ -1,10 +1,10 @@
+*{ font-family: Helvetica,sans-serif;}
 ul,ol {list-style: none;}
 h1,h2,h3 {font-weight: normal; font-family: Helvetica,sans-serif; color: #333;}
 body {font-size: 3.7vw;}
-
+.userHide {display: none;}
 section>h2:first-child {font-size: 4.53vw; border-left: 2px solid #D33A31; margin:  4vw 0; padding-left: 2vw; line-height: 4.7vw; max-height: 3.7vw; }
 a {text-decoration: none; color: inherit;}
-
 p.loading {text-align: center; margin-top: 5vw;}
 ol.songItems{padding-left: 2.8vw;
 		li {display:flex; align-items: center; border-bottom: 1px solid rgba(0,0,0,.1); padding: 1.6vw 0; position: relative;
@@ -14,7 +14,7 @@ ol.songItems{padding-left: 2.8vw;
 			.hide {display: none;}
 			.sq {width: 4.2vw; height: 4.2vw; fill: #FE672E; margin-right: 0.25em; display: inline-block;}
 			.close {width: 3.2vw; height: 3.2vw; position: absolute; right: 4vw; top: 50%; transform: translateY(-50%); fill: #AAA;}
-			.time {width: 4vw; height: 4vw; fill: #ccc; margin-right: 0.25em; display: inline-block; position: absolute; left: -7.5vw;}
+			.svgSearch,.time {width: 4vw; height: 4vw; fill: #ccc; margin-right: 0.25em; display: inline-block; position: absolute; left: -7.5vw;}
 		}
 	}
  
@@ -35,7 +35,7 @@ ol.songItems{padding-left: 2.8vw;
 }
 
 .tabContent {
-	>li {display: none; padding-top: 27vw; 
+	>li {display: none; padding-top: 27vw; overflow-x: hidden; 
 		.hotblogHeader {background: url(../img/hotblogBG.jpg) no-repeat; background-size: cover; position: relative; min-height: 39vw;
 			.hotTop {	display: flex; flex-direction: column; justify-content: center; min-height: 39vw; padding-left: 5.33333vw;
 				.title {background: url(../img/spritePic.png)no-repeat; background-size: 44.2vw 25.8vw; width: 37.9vw; height: 17.7vw; background-position: -6.4vw -7.7vw; z-index: 2;}
@@ -50,7 +50,6 @@ ol.songItems{padding-left: 2.8vw;
 		li:first-child div, li:nth-child(2) div, li:nth-child(3) div{color: #df3436;}
 		}
 		.hotfoot{height: 55px; line-height: 55px; text-align: center; color: #999; }
-
 		.hotSearch { padding: 0 2.6666vw;
 			h4 {font-size: 2vw; line-height: 3.2vw; color: #999; padding: 4vw 0 1.2vw 1vw;}
 			.list>li{ border: solid 1px #ccc; font-size: 14px; padding: 0 4vw; margin: 1vw; border-radius: 6vw; line-height: 9vw; display: inline-block; color: #333;}
@@ -58,11 +57,18 @@ ol.songItems{padding-left: 2.8vw;
 				h3 { font-size: 3.5vw; line-height: 7vw; color: #666;}
 			}
 		}
+		#output {
+			.searchResult { color: #507daf; line-height: 5vw; font-size: 4vw; padding: 4vw 3vw; border-bottom: 1px solid rgba(0,0,0,0.1);}
+			ol>li {margin-left: 6vw; line-height: 12vw; font-size: 4vw;
+				.svgSearch {width: 5vw; height: 5vw;}
+			}
+		}
 	}
 	>li.active {display: block}
 	#searchMusic { margin: 4vw 2.6vw; background: #ebecec; position: relative; padding: 0 8vw; border-radius: 50%; border-radius: 5vw; 
 		input{ width: 100%; height: 8vw; background: transparent; font-size: 3.7vw; line-height: 4.8vw; border: 0; outline: none;}
 		.svgSearch {width: 3.8vw; height: 3.8vw; fill: #999; position: absolute; top: 2.2vw; left: 2.6vw;}
+		.svgClose {width: 3.8vw; height: 3.8vw; fill: #999; position: absolute; top: 2.2vw; right: 2.6vw;}
 		.searchName {    position: absolute; color: #c9c9c9; font-size: 3.8vw; top: 1vw; left: 8vw; background: transparent; pointer-events: none; cursor: none;}
 	}
 	#searchMusic::after{content: ''; border-bottom: 1px solid rgba(0,0,0,.1); display: block; position: absolute; bottom: -4vw; left: -3vw; right: -3vw;}

@@ -155,6 +155,9 @@
   background: rgba(0, 0, 0, 0.3);
   z-index: 0;
 }
+* {
+  font-family: Helvetica, sans-serif;
+}
 ul,
 ol {
   list-style: none;
@@ -168,6 +171,9 @@ h3 {
 }
 body {
   font-size: 3.7vw;
+}
+.userHide {
+  display: none;
 }
 section > h2:first-child {
   font-size: 4.53vw;
@@ -240,6 +246,7 @@ ol.songItems li .close {
   transform: translateY(-50%);
   fill: #AAA;
 }
+ol.songItems li .svgSearch,
 ol.songItems li .time {
   width: 4vw;
   height: 4vw;
@@ -309,6 +316,7 @@ ol.songItems li .time {
 .tabContent > li {
   display: none;
   padding-top: 27vw;
+  overflow-x: hidden;
 }
 .tabContent > li .hotblogHeader {
   background: url(hotblogBG_hAx-tvB.jpg) no-repeat;
@@ -399,6 +407,22 @@ ol.songItems li .time {
   line-height: 7vw;
   color: #666;
 }
+.tabContent > li #output .searchResult {
+  color: #507daf;
+  line-height: 5vw;
+  font-size: 4vw;
+  padding: 4vw 3vw;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.tabContent > li #output ol > li {
+  margin-left: 6vw;
+  line-height: 12vw;
+  font-size: 4vw;
+}
+.tabContent > li #output ol > li .svgSearch {
+  width: 5vw;
+  height: 5vw;
+}
 .tabContent > li.active {
   display: block;
 }
@@ -426,6 +450,14 @@ ol.songItems li .time {
   position: absolute;
   top: 2.2vw;
   left: 2.6vw;
+}
+.tabContent #searchMusic .svgClose {
+  width: 3.8vw;
+  height: 3.8vw;
+  fill: #999;
+  position: absolute;
+  top: 2.2vw;
+  right: 2.6vw;
 }
 .tabContent #searchMusic .searchName {
   position: absolute;
