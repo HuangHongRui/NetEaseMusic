@@ -7,15 +7,17 @@ a {text-decoration: none; color: inherit;}
 
 p.loading {text-align: center; margin-top: 5vw;}
 ol.songItems{padding-left: 2.8vw;
-		li {border-bottom: 1px solid rgba(0,0,0,.1); padding: 1.6vw 0; position: relative;
+		li {display:flex; align-items: center; border-bottom: 1px solid rgba(0,0,0,.1); padding: 1.6vw 0; position: relative;
 			h3 {font-size: 4.6vw; line-height: 7vw; color: #333}
-			p {font-size: 4vw; color: #888; line-height: 1; align-items: center; width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-break: normal;}
+			p {display: flex; font-size: 4vw; color: #888; line-height: 6vw; align-items: center; width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-break: normal;}
 			.playCl {width: 5.9vw; height: 5.9vw; position: absolute; right: 4vw; top: 50%; transform: translateY(-50%); fill: #AAA;}
 			.hide {display: none;}
 			.sq {width: 4.2vw; height: 4.2vw; fill: #FE672E; margin-right: 0.25em; display: inline-block;}
+			.close {width: 3.2vw; height: 3.2vw; position: absolute; right: 4vw; top: 50%; transform: translateY(-50%); fill: #AAA;}
+			.time {width: 4vw; height: 4vw; fill: #ccc; margin-right: 0.25em; display: inline-block; position: absolute; left: -7.5vw;}
 		}
 	}
-
+ 
 .topbar {position: fixed; width: 100%; z-index: 5; top: 0; background: #D43C33; padding: 4.8vw 3vw; display: flex; align-items: center; justify-content: center;
 	.logo {width: 38vw;}
 	.sourceCode {max-height: 7vw; line-height: 7.2vw; border: solid #fff 1px; border-radius: 3.5vw; color: #fff; text-decoration: none; padding: 0 1em; letter-spacing: 0.1em;}
@@ -48,6 +50,14 @@ ol.songItems{padding-left: 2.8vw;
 		li:first-child div, li:nth-child(2) div, li:nth-child(3) div{color: #df3436;}
 		}
 		.hotfoot{height: 55px; line-height: 55px; text-align: center; color: #999; }
+
+		.hotSearch { padding: 0 2.6666vw;
+			h4 {font-size: 2vw; line-height: 3.2vw; color: #999; padding: 4vw 0 1.2vw 1vw;}
+			.list>li{ border: solid 1px #ccc; font-size: 14px; padding: 0 4vw; margin: 1vw; border-radius: 6vw; line-height: 9vw; display: inline-block; color: #333;}
+			.songItems>li {margin-left: 6vw;
+				h3 { font-size: 3.5vw; line-height: 7vw; color: #666;}
+			}
+		}
 	}
 	>li.active {display: block}
 	#searchMusic { margin: 4vw 2.6vw; background: #ebecec; position: relative; padding: 0 8vw; border-radius: 50%; border-radius: 5vw; 

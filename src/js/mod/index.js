@@ -41,21 +41,11 @@ setTimeout(function(){
 		</li>
 		`
 		document.querySelector(".lastestMusic >.songItems").innerHTML += li
-		// let liDom = parseToDom(li)
-		// document.querySelector(".lastestMusic >.songItems").appendChild(liDom)
-		// function parseToDom(str){
-		// 	let div = document.createElement("li")
-		// 	if (typeof str == "string")
-		// 		div.innerHTML = li
-		// 	return div
-		// }
 	});
 		let loadNode = document.querySelector(".loading")
 		loadNode.parentNode.removeChild(loadNode)
 	}, function(){})
 },1000)
-
-	
 
 document.querySelectorAll('.tabItems >li').forEach(function(li){
 	let lis = document.querySelectorAll('.tabItems >li') 
@@ -80,30 +70,6 @@ document.querySelectorAll('.tabItems >li').forEach(function(li){
 		}
 		if (index === 1) {
 			setTimeout(function(){
-			// 	getJSON('../src/js/lib/page2.json').then((response)=>{
-			// 	// tabLisNow.innerText = response.text
-			// 	let items = response
-			// 	items.forEach( (ele) => {
-			// 		let judge = Math.random()>0.5?'sq':''
-			// 		let li = `
-			// 		<li>
-			// 		<div>${ele.num}</div>
-			// 		<a href="../../../bin/song.html?id=${ele.id}">
-			// 		<h3>${ele.name}</h3>
-			// 		<p>
-			// 		<svg class="${judge} hide">
-			// 		<use xlink:href="#icon-sq"></use>
-			// 		</svg>
-			// 		${ele.author}-${ele.info}</p>
-			// 		<svg class="playCl">
-			// 		<use xlink:href="#icon-play-circle"></use>
-			// 		</svg>
-			// 		</a>
-			// 		</li>
-			// 		`
-			// 		document.querySelector(".songItems.hot").innerHTML += li
-			// 	});
-			// })
 				requestBase()
 				let loading = document.querySelector('.loading')
 				loading.parentNode.removeChild(loading)
@@ -154,7 +120,16 @@ document.querySelector('.hotfoot span').addEventListener('click', function(){
 		let inputNode = e.target
 		let value = inputNode.value.trim()
 		let output = document.querySelector('#output')
-		if( value === '') return
+		let label = document.querySelector('label.searchName')
+		let labelParent = document.querySelector('#searchMusic input')
+		function clearValue() {
+			labelParent.addEventListener('blur', function(){
+				labelParent.value = ''
+				label.style.display = 'block'
+			})
+		}
+		if( value === '') return 
+		if(label){label.style.display = 'none'}
 		if (clockLock) {
 			clearTimeout(clockLock)
 		}
@@ -162,12 +137,13 @@ document.querySelector('.hotfoot span').addEventListener('click', function(){
 			search(value).then((result)=>{
 				if (result.length !== 0){
 					output.innerText = result.map((arg)=>arg.name).join('\n')
+					if(label) clearValue()
 				}else{
-					output.innerText = '抱歉, 没有'
+					output.innerText = '抱歉, 没有搜索到.'
+					if(label) clearValue()
 				}
 			})
 		})
-		// console.log(value)
 	})
 
 	function search(keyword){
