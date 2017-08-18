@@ -22,8 +22,15 @@ a {text-decoration: none; color: inherit;}
 }
 
 .tabContent {
-	>li {display: none; margin-top: 31.5vw; }
+	>li {display: none; padding-top: 27vw; }
 	>li.active {display: block}
+	.hotblogHeader {background: url(../img/hotblogBG.jpg) no-repeat; background-size: cover; position: relative; min-height: 39vw;
+		.hotTop {	display: flex; flex-direction: column; justify-content: center; min-height: 39vw; padding-left: 5.33333vw;
+			.title {background: url(../img/spritePic.png)no-repeat; background-size: 44.2vw 25.8vw; width: 37.9vw; height: 17.7vw; background-position: -6.4vw -7.7vw; z-index: 2;}
+			.hottime {color:hsla(0,0%,100%,.8); margin-top: 2.666666vw; font-size: 2vw; transform: scale(.91); transform-origin: left top; z-index: 2;}
+		}
+		.hotTop::after {content: " "; z-index: 1; background-color: rgba(0,0,0,.2); position: absolute; left: 0; top: 0; right: 0; bottom: 0;} 
+	}
 }
 
 .playlists { //margin-top: 31.5vw; 

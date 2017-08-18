@@ -240,10 +240,49 @@ a {
 }
 .tabContent > li {
   display: none;
-  margin-top: 31.5vw;
+  padding-top: 27vw;
 }
 .tabContent > li.active {
   display: block;
+}
+.tabContent .hotblogHeader {
+  background: url(hotblogBG_hAx-tvB.jpg) no-repeat;
+  background-size: cover;
+  position: relative;
+  min-height: 39vw;
+}
+.tabContent .hotblogHeader .hotTop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 39vw;
+  padding-left: 5.33333vw;
+}
+.tabContent .hotblogHeader .hotTop .title {
+  background: url(spritePic_-sT9bDD.png) no-repeat;
+  background-size: 44.2vw 25.8vw;
+  width: 37.9vw;
+  height: 17.7vw;
+  background-position: -6.4vw -7.7vw;
+  z-index: 2;
+}
+.tabContent .hotblogHeader .hotTop .hottime {
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 2.666666vw;
+  font-size: 2vw;
+  transform: scale(0.91);
+  transform-origin: left top;
+  z-index: 2;
+}
+.tabContent .hotblogHeader .hotTop::after {
+  content: " ";
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 .playlists > ul {
   display: flex;

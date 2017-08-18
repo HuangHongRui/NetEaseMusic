@@ -201,7 +201,7 @@ document.querySelectorAll('.tabItems >li').forEach(function (li) {
 		}
 		if (index === 1) {
 			getJSON('../src/js/lib/page2.json').then(function (response) {
-				tabLisNow.innerText = response.text;
+				// tabLisNow.innerText = response.text
 				tabLisNow.setAttribute('data-downloaded', 'yeah');
 			});
 		} else if (index === 2) {
