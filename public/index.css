@@ -181,6 +181,53 @@ a {
   text-decoration: none;
   color: inherit;
 }
+p.loading {
+  text-align: center;
+  margin-top: 5vw;
+}
+ol.songItems {
+  padding-left: 2.8vw;
+}
+ol.songItems li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1.6vw 0;
+  position: relative;
+}
+ol.songItems li h3 {
+  font-size: 4.6vw;
+  line-height: 7vw;
+  color: #333;
+}
+ol.songItems li p {
+  font-size: 4vw;
+  color: #888;
+  line-height: 1;
+  align-items: center;
+  width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: normal;
+}
+ol.songItems li .playCl {
+  width: 5.9vw;
+  height: 5.9vw;
+  position: absolute;
+  right: 4vw;
+  top: 50%;
+  transform: translateY(-50%);
+  fill: #AAA;
+}
+ol.songItems li .hide {
+  display: none;
+}
+ol.songItems li .sq {
+  width: 4.2vw;
+  height: 4.2vw;
+  fill: #FE672E;
+  margin-right: 0.25em;
+  display: inline-block;
+}
 .topbar {
   position: fixed;
   width: 100%;
@@ -190,7 +237,7 @@ a {
   padding: 4.8vw 3vw;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 .topbar .logo {
   width: 38vw;
@@ -242,23 +289,20 @@ a {
   display: none;
   padding-top: 27vw;
 }
-.tabContent > li.active {
-  display: block;
-}
-.tabContent .hotblogHeader {
+.tabContent > li .hotblogHeader {
   background: url(hotblogBG_hAx-tvB.jpg) no-repeat;
   background-size: cover;
   position: relative;
   min-height: 39vw;
 }
-.tabContent .hotblogHeader .hotTop {
+.tabContent > li .hotblogHeader .hotTop {
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-height: 39vw;
   padding-left: 5.33333vw;
 }
-.tabContent .hotblogHeader .hotTop .title {
+.tabContent > li .hotblogHeader .hotTop .title {
   background: url(spritePic_-sT9bDD.png) no-repeat;
   background-size: 44.2vw 25.8vw;
   width: 37.9vw;
@@ -266,7 +310,7 @@ a {
   background-position: -6.4vw -7.7vw;
   z-index: 2;
 }
-.tabContent .hotblogHeader .hotTop .hottime {
+.tabContent > li .hotblogHeader .hotTop .hottime {
   color: rgba(255, 255, 255, 0.8);
   margin-top: 2.666666vw;
   font-size: 2vw;
@@ -274,7 +318,7 @@ a {
   transform-origin: left top;
   z-index: 2;
 }
-.tabContent .hotblogHeader .hotTop::after {
+.tabContent > li .hotblogHeader .hotTop::after {
   content: " ";
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.2);
@@ -283,6 +327,32 @@ a {
   top: 0;
   right: 0;
   bottom: 0;
+}
+.tabContent > li .songItems.hot li {
+  display: flex;
+  align-items: center;
+  margin-left: 8vw;
+}
+.tabContent > li .songItems.hot li div {
+  width: 7.4vw;
+  color: #999;
+  font: 4.53333vw/1.5 Helvetica, sans-serif;
+  position: absolute;
+  left: -8vw;
+}
+.tabContent > li .songItems.hot li:first-child div,
+.tabContent > li .songItems.hot li:nth-child(2) div,
+.tabContent > li .songItems.hot li:nth-child(3) div {
+  color: #df3436;
+}
+.tabContent > li .hotfoot {
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  color: #999;
+}
+.tabContent > li.active {
+  display: block;
 }
 .playlists > ul {
   display: flex;
@@ -331,48 +401,6 @@ a {
   padding: 0.5vw 1.6vw;
   line-height: 4.6vw;
   color: #333;
-}
-.lastestMusic > p {
-  text-align: center;
-}
-.lastestMusic ol {
-  padding-left: 2.8vw;
-}
-.lastestMusic ol li {
-  border-bottom: 1px solid #E2E2E3;
-  padding: 1.6vw 0;
-  position: relative;
-}
-.lastestMusic ol li h3 {
-  font-size: 4.6vw;
-  line-height: 7vw;
-  color: #333;
-}
-.lastestMusic ol li p {
-  font-size: 4vw;
-  color: #888;
-  display: flex;
-  line-height: 1;
-  align-items: center;
-}
-.lastestMusic ol li .playCl {
-  width: 5.9vw;
-  height: 5.9vw;
-  position: absolute;
-  right: 4vw;
-  top: 50%;
-  transform: translateY(-50%);
-  fill: #AAA;
-}
-.lastestMusic ol li .hide {
-  display: none;
-}
-.lastestMusic ol li .sq {
-  width: 4.2vw;
-  height: 4.2vw;
-  fill: #FE672E;
-  margin-right: 0.25em;
-  display: inline-block;
 }
 .art {
   text-align: center;

@@ -6,7 +6,6 @@ var getJSON = function(url) {
 		client.responseType = "json";
 		client.setRequestHeader("Accept", "application/json");
 		client.send();
-
 		function handler() {
 			if(this.readyState !== 4) {
 				return;
@@ -27,6 +26,7 @@ setTimeout(function(){
 		items.forEach( (ele) => {
 		let judge = Math.random()>0.5?'sq':''
 		let li = `
+		<li>
 		<a href="../../../bin/song.html?id=${ele.id}">
 		<h3>${ele.name}</h3>
 		<p>
@@ -38,60 +38,116 @@ setTimeout(function(){
 		<use xlink:href="#icon-play-circle"></use>
 		</svg>
 		</a>
+		</li>
 		`
-		let liDom = parseToDom(li)
-		document.querySelector("#songItems").appendChild(liDom)
-		function parseToDom(str){
-			let div = document.createElement("li")
-			if (typeof str == "string")
-				div.innerHTML = li
-			return div
-		}
+		document.querySelector(".lastestMusic >.songItems").innerHTML += li
+		// let liDom = parseToDom(li)
+		// document.querySelector(".lastestMusic >.songItems").appendChild(liDom)
+		// function parseToDom(str){
+		// 	let div = document.createElement("li")
+		// 	if (typeof str == "string")
+		// 		div.innerHTML = li
+		// 	return div
+		// }
 	});
-		let loadNode = document.querySelector("#loading")
-		document.querySelector(".lastestMusic").removeChild(loadNode)
-
-	}, function(){
-		console.log('读取失败')
-	})
+		let loadNode = document.querySelector(".loading")
+		loadNode.parentNode.removeChild(loadNode)
+	}, function(){})
 },1000)
 
 	
 
-	document.querySelectorAll('.tabItems >li').forEach(function(li){
-		let lis = document.querySelectorAll('.tabItems >li') 
-		let tabLis = document.querySelectorAll('.tabContent >li')
-		let index 
-		li.onclick = function(e){
-			let target = e.currentTarget
-			index = [].indexOf.call(lis, target)
-			lis.forEach(function(li){
-				li.classList.remove('active')
-			})
-			target.classList.add('active')
-			tabLis.forEach(function(li){
-				li.classList.remove('active')
-			})
-			tabLis[index].classList.add('active')
+document.querySelectorAll('.tabItems >li').forEach(function(li){
+	let lis = document.querySelectorAll('.tabItems >li') 
+	let tabLis = document.querySelectorAll('.tabContent >li')
+	let index 
+	li.onclick = function(e){
+		let target = e.currentTarget
+		index = [].indexOf.call(lis, target)
+		lis.forEach(function(li){
+			li.classList.remove('active')
+		})
+		target.classList.add('active')
+		tabLis.forEach(function(li){
+			li.classList.remove('active')
+		})
+		tabLis[index].classList.add('active')
 
-			let tabLisNow = tabLis[index]
-			if (tabLisNow.getAttribute('data-downloaded') === 'yeah'){
-				console.log('hahaha')
-				return
-			}
-			if (index === 1) {
-				getJSON('../src/js/lib/page2.json').then((response)=>{
-					// tabLisNow.innerText = response.text
-					tabLisNow.setAttribute('data-downloaded', 'yeah')
-				})
-			} else if (index === 2) {
-				getJSON('../src/js/lib/page3.json').then((response)=>{
-					// tabLisNow.innerText = response.text
-					// tabLisNow.setAttribute('data-downloaded', 'yeah')
-				})
-			}
+		let tabLisNow = tabLis[index]
+		if (tabLisNow.getAttribute('data-downloaded') === 'yeah'){
+			// console.log('hahaha')
+			return
 		}
-	})
+		if (index === 1) {
+			setTimeout(function(){
+			// 	getJSON('../src/js/lib/page2.json').then((response)=>{
+			// 	// tabLisNow.innerText = response.text
+			// 	let items = response
+			// 	items.forEach( (ele) => {
+			// 		let judge = Math.random()>0.5?'sq':''
+			// 		let li = `
+			// 		<li>
+			// 		<div>${ele.num}</div>
+			// 		<a href="../../../bin/song.html?id=${ele.id}">
+			// 		<h3>${ele.name}</h3>
+			// 		<p>
+			// 		<svg class="${judge} hide">
+			// 		<use xlink:href="#icon-sq"></use>
+			// 		</svg>
+			// 		${ele.author}-${ele.info}</p>
+			// 		<svg class="playCl">
+			// 		<use xlink:href="#icon-play-circle"></use>
+			// 		</svg>
+			// 		</a>
+			// 		</li>
+			// 		`
+			// 		document.querySelector(".songItems.hot").innerHTML += li
+			// 	});
+			// })
+				requestBase()
+				let loading = document.querySelector('.loading')
+				loading.parentNode.removeChild(loading)
+				tabLisNow.setAttribute('data-downloaded', 'yeah')
+			},500)
+		} else if (index === 2) {
+			getJSON('../src/js/lib/page3.json').then((response)=>{
+				// tabLisNow.innerText = response.text
+				tabLisNow.setAttribute('data-downloaded', 'yeah')
+			})
+		}
+	}
+})
+
+document.querySelector('.hotfoot span').addEventListener('click', function(){
+	requestBase()
+})
+
+	function requestBase(){
+		getJSON('../src/js/lib/page2.json').then((response)=>{
+			// tabLisNow.innerText = response.text
+			let items = response
+			items.forEach( (ele) => {
+				let judge = Math.random()>0.5?'sq':''
+				let li = `
+				<li>
+				<div>${ele.num}</div>
+				<a href="../../../bin/song.html?id=${ele.id}">
+				<h3>${ele.name}</h3>
+				<p>
+				<svg class="${judge} hide">
+				<use xlink:href="#icon-sq"></use>
+				</svg>
+				${ele.author}-${ele.info}</p>
+				<svg class="playCl">
+				<use xlink:href="#icon-play-circle"></use>
+				</svg>
+				</a>
+				</li>
+				`
+				document.querySelector(".songItems.hot").innerHTML += li
+			});
+		})
+	}
 
 	let clockLock = undefined
 	document.querySelector('#searchMusic').addEventListener('input', function(e){

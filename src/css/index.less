@@ -5,7 +5,18 @@ body {font-size: 3.7vw;}
 section>h2:first-child {font-size: 4.53vw; border-left: 2px solid #D33A31; margin:  4vw 0; padding-left: 2vw; line-height: 4.7vw; max-height: 3.7vw; }
 a {text-decoration: none; color: inherit;}
 
-.topbar {position: fixed; width: 100%; z-index: 5; top: 0; background: #D43C33; padding: 4.8vw 3vw; display: flex; align-items: center; justify-content: space-between;
+p.loading {text-align: center; margin-top: 5vw;}
+ol.songItems{padding-left: 2.8vw;
+		li {border-bottom: 1px solid rgba(0,0,0,.1); padding: 1.6vw 0; position: relative;
+			h3 {font-size: 4.6vw; line-height: 7vw; color: #333}
+			p {font-size: 4vw; color: #888; line-height: 1; align-items: center; width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; word-break: normal;}
+			.playCl {width: 5.9vw; height: 5.9vw; position: absolute; right: 4vw; top: 50%; transform: translateY(-50%); fill: #AAA;}
+			.hide {display: none;}
+			.sq {width: 4.2vw; height: 4.2vw; fill: #FE672E; margin-right: 0.25em; display: inline-block;}
+		}
+	}
+
+.topbar {position: fixed; width: 100%; z-index: 5; top: 0; background: #D43C33; padding: 4.8vw 3vw; display: flex; align-items: center; justify-content: center;
 	.logo {width: 38vw;}
 	.sourceCode {max-height: 7vw; line-height: 7.2vw; border: solid #fff 1px; border-radius: 3.5vw; color: #fff; text-decoration: none; padding: 0 1em; letter-spacing: 0.1em;}
 }
@@ -22,15 +33,23 @@ a {text-decoration: none; color: inherit;}
 }
 
 .tabContent {
-	>li {display: none; padding-top: 27vw; }
-	>li.active {display: block}
-	.hotblogHeader {background: url(../img/hotblogBG.jpg) no-repeat; background-size: cover; position: relative; min-height: 39vw;
-		.hotTop {	display: flex; flex-direction: column; justify-content: center; min-height: 39vw; padding-left: 5.33333vw;
-			.title {background: url(../img/spritePic.png)no-repeat; background-size: 44.2vw 25.8vw; width: 37.9vw; height: 17.7vw; background-position: -6.4vw -7.7vw; z-index: 2;}
-			.hottime {color:hsla(0,0%,100%,.8); margin-top: 2.666666vw; font-size: 2vw; transform: scale(.91); transform-origin: left top; z-index: 2;}
+	>li {display: none; padding-top: 27vw; 
+		.hotblogHeader {background: url(../img/hotblogBG.jpg) no-repeat; background-size: cover; position: relative; min-height: 39vw;
+			.hotTop {	display: flex; flex-direction: column; justify-content: center; min-height: 39vw; padding-left: 5.33333vw;
+				.title {background: url(../img/spritePic.png)no-repeat; background-size: 44.2vw 25.8vw; width: 37.9vw; height: 17.7vw; background-position: -6.4vw -7.7vw; z-index: 2;}
+				.hottime {color:hsla(0,0%,100%,.8); margin-top: 2.666666vw; font-size: 2vw; transform: scale(.91); transform-origin: left top; z-index: 2;}
+			}
+			.hotTop::after {content: " "; z-index: 1; background-color: rgba(0,0,0,.2); position: absolute; left: 0; top: 0; right: 0; bottom: 0;} 
 		}
-		.hotTop::after {content: " "; z-index: 1; background-color: rgba(0,0,0,.2); position: absolute; left: 0; top: 0; right: 0; bottom: 0;} 
+		.songItems.hot{ 
+		li {display: flex; align-items: center; margin-left: 8vw;
+			div { width: 7.4vw; color: #999; font: 4.53333vw/1.5 Helvetica,sans-serif; position: absolute; left: -8vw;}
+		}
+		li:first-child div, li:nth-child(2) div, li:nth-child(3) div{color: #df3436;}
+		}
+		.hotfoot{height: 55px; line-height: 55px; text-align: center; color: #999; }
 	}
+	>li.active {display: block}
 }
 
 .playlists { //margin-top: 31.5vw; 
@@ -45,16 +64,15 @@ a {text-decoration: none; color: inherit;}
 }
 
 .lastestMusic {
-	> p {text-align: center;}
-	ol{padding-left: 2.8vw;
-		li {border-bottom: 1px solid #E2E2E3; padding: 1.6vw 0; position: relative;
-			h3 {font-size: 4.6vw; line-height: 7vw; color: #333}
-			p {font-size: 4vw; color: #888; display: flex; line-height: 1; align-items: center;}
-			.playCl {width: 5.9vw; height: 5.9vw; position: absolute; right: 4vw; top: 50%; transform: translateY(-50%); fill: #AAA;}
-			.hide {display: none;}
-			.sq {width: 4.2vw; height: 4.2vw; fill: #FE672E; margin-right: 0.25em; display: inline-block;}
-		}
-	}
+	// ol{padding-left: 2.8vw;
+	// 	li {border-bottom: 1px solid #E2E2E3; padding: 1.6vw 0; position: relative;
+	// 		h3 {font-size: 4.6vw; line-height: 7vw; color: #333}
+	// 		p {font-size: 4vw; color: #888; display: flex; line-height: 1; align-items: center;}
+	// 		.playCl {width: 5.9vw; height: 5.9vw; position: absolute; right: 4vw; top: 50%; transform: translateY(-50%); fill: #AAA;}
+	// 		.hide {display: none;}
+	// 		.sq {width: 4.2vw; height: 4.2vw; fill: #FE672E; margin-right: 0.25em; display: inline-block;}
+	// 	}
+	// }
 }
 
 .art { text-align: center; padding-top: 16vw; background: transparent url(../img/bg.png) no-repeat center 0; background-size: cover; padding-bottom: 5vw;

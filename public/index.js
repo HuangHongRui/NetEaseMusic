@@ -142,7 +142,6 @@ var getJSON = function getJSON(url) {
 		client.responseType = "json";
 		client.setRequestHeader("Accept", "application/json");
 		client.send();
-
 		function handler() {
 			if (this.readyState !== 4) {
 				return;
@@ -162,20 +161,20 @@ setTimeout(function () {
 		var items = json;
 		items.forEach(function (ele) {
 			var judge = Math.random() > 0.5 ? 'sq' : '';
-			var li = "\n\t\t<a href=\"../../../bin/song.html?id=" + ele.id + "\">\n\t\t<h3>" + ele.name + "</h3>\n\t\t<p>\n\t\t<svg class=\"" + judge + " hide\">\n\t\t<use xlink:href=\"#icon-sq\"></use>\n\t\t</svg>\n\t\t" + ele.author + "-" + ele.info + "</p>\n\t\t<svg class=\"playCl\">\n\t\t<use xlink:href=\"#icon-play-circle\"></use>\n\t\t</svg>\n\t\t</a>\n\t\t";
-			var liDom = parseToDom(li);
-			document.querySelector("#songItems").appendChild(liDom);
-			function parseToDom(str) {
-				var div = document.createElement("li");
-				if (typeof str == "string") div.innerHTML = li;
-				return div;
-			}
+			var li = "\n\t\t<li>\n\t\t<a href=\"../../../bin/song.html?id=" + ele.id + "\">\n\t\t<h3>" + ele.name + "</h3>\n\t\t<p>\n\t\t<svg class=\"" + judge + " hide\">\n\t\t<use xlink:href=\"#icon-sq\"></use>\n\t\t</svg>\n\t\t" + ele.author + "-" + ele.info + "</p>\n\t\t<svg class=\"playCl\">\n\t\t<use xlink:href=\"#icon-play-circle\"></use>\n\t\t</svg>\n\t\t</a>\n\t\t</li>\n\t\t";
+			document.querySelector(".lastestMusic >.songItems").innerHTML += li;
+			// let liDom = parseToDom(li)
+			// document.querySelector(".lastestMusic >.songItems").appendChild(liDom)
+			// function parseToDom(str){
+			// 	let div = document.createElement("li")
+			// 	if (typeof str == "string")
+			// 		div.innerHTML = li
+			// 	return div
+			// }
 		});
-		var loadNode = document.querySelector("#loading");
-		document.querySelector(".lastestMusic").removeChild(loadNode);
-	}, function () {
-		console.log('读取失败');
-	});
+		var loadNode = document.querySelector(".loading");
+		loadNode.parentNode.removeChild(loadNode);
+	}, function () {});
 }, 1000);
 
 document.querySelectorAll('.tabItems >li').forEach(function (li) {
@@ -196,22 +195,64 @@ document.querySelectorAll('.tabItems >li').forEach(function (li) {
 
 		var tabLisNow = tabLis[index];
 		if (tabLisNow.getAttribute('data-downloaded') === 'yeah') {
-			console.log('hahaha');
+			// console.log('hahaha')
 			return;
 		}
 		if (index === 1) {
-			getJSON('../src/js/lib/page2.json').then(function (response) {
-				// tabLisNow.innerText = response.text
+			setTimeout(function () {
+				// 	getJSON('../src/js/lib/page2.json').then((response)=>{
+				// 	// tabLisNow.innerText = response.text
+				// 	let items = response
+				// 	items.forEach( (ele) => {
+				// 		let judge = Math.random()>0.5?'sq':''
+				// 		let li = `
+				// 		<li>
+				// 		<div>${ele.num}</div>
+				// 		<a href="../../../bin/song.html?id=${ele.id}">
+				// 		<h3>${ele.name}</h3>
+				// 		<p>
+				// 		<svg class="${judge} hide">
+				// 		<use xlink:href="#icon-sq"></use>
+				// 		</svg>
+				// 		${ele.author}-${ele.info}</p>
+				// 		<svg class="playCl">
+				// 		<use xlink:href="#icon-play-circle"></use>
+				// 		</svg>
+				// 		</a>
+				// 		</li>
+				// 		`
+				// 		document.querySelector(".songItems.hot").innerHTML += li
+				// 	});
+				// })
+				requestBase();
+				var loading = document.querySelector('.loading');
+				loading.parentNode.removeChild(loading);
 				tabLisNow.setAttribute('data-downloaded', 'yeah');
-			});
+			}, 500);
 		} else if (index === 2) {
 			getJSON('../src/js/lib/page3.json').then(function (response) {
 				// tabLisNow.innerText = response.text
-				// tabLisNow.setAttribute('data-downloaded', 'yeah')
+				tabLisNow.setAttribute('data-downloaded', 'yeah');
 			});
 		}
 	};
 });
+
+document.querySelector('.hotfoot span').addEventListener('click', function () {
+	requestBase();
+});
+
+function requestBase() {
+	getJSON('../src/js/lib/page2.json').then(function (response) {
+		// tabLisNow.innerText = response.text
+		var items = response;
+		items.forEach(function (ele) {
+			var judge = Math.random() > 0.5 ? 'sq' : '';
+			var li = "\n\t\t\t\t<li>\n\t\t\t\t<div>" + ele.num + "</div>\n\t\t\t\t<a href=\"../../../bin/song.html?id=" + ele.id + "\">\n\t\t\t\t<h3>" + ele.name + "</h3>\n\t\t\t\t<p>\n\t\t\t\t<svg class=\"" + judge + " hide\">\n\t\t\t\t<use xlink:href=\"#icon-sq\"></use>\n\t\t\t\t</svg>\n\t\t\t\t" + ele.author + "-" + ele.info + "</p>\n\t\t\t\t<svg class=\"playCl\">\n\t\t\t\t<use xlink:href=\"#icon-play-circle\"></use>\n\t\t\t\t</svg>\n\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t";
+			document.querySelector(".songItems.hot").innerHTML += li;
+		});
+	});
+}
 
 var clockLock = undefined;
 document.querySelector('#searchMusic').addEventListener('input', function (e) {
