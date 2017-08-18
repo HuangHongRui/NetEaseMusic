@@ -138,8 +138,14 @@
       </li>
 
       <li>
-          <p id="tab3loading"><img src="../src/img/spin.gif" alt=""></p>
-          <input id="searchMusic" type="text" style="border: solid 1px lightblue;">
+          <!-- <p id="tab3loading"><img src="../src/img/spin.gif" alt=""></p> -->
+          <div id="searchMusic">
+            <svg class="svgSearch">
+              <use xlink:href="#icon-search"></use>
+            </svg> 
+            <input type="text">
+            <label class="searchName">搜索歌曲名</label>
+          </div>
           <div id="output"></div>
       </li>
     </ol>

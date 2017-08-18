@@ -255,14 +255,14 @@ ol.songItems li .sq {
 .siteNav {
   position: fixed;
   z-index: 3;
-  top: 16.5vw;
+  top: 16.3vw;
   background: #fff;
   width: 100%;
 }
 .siteNav > ol {
   display: flex;
   text-align: center;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 1.1em;
 }
 .siteNav > ol > li {
@@ -353,6 +353,50 @@ ol.songItems li .sq {
 }
 .tabContent > li.active {
   display: block;
+}
+.tabContent #searchMusic {
+  margin: 4vw 2.6vw;
+  background: #ebecec;
+  position: relative;
+  padding: 0 8vw;
+  border-radius: 50%;
+  border-radius: 5vw;
+}
+.tabContent #searchMusic input {
+  width: 100%;
+  height: 8vw;
+  background: transparent;
+  font-size: 3.7vw;
+  line-height: 4.8vw;
+  border: 0;
+  outline: none;
+}
+.tabContent #searchMusic .svgSearch {
+  width: 3.8vw;
+  height: 3.8vw;
+  fill: #999;
+  position: absolute;
+  top: 2.2vw;
+  left: 2.6vw;
+}
+.tabContent #searchMusic .searchName {
+  position: absolute;
+  color: #c9c9c9;
+  font-size: 3.8vw;
+  top: 1vw;
+  left: 8vw;
+  background: transparent;
+  pointer-events: none;
+  cursor: none;
+}
+.tabContent #searchMusic::after {
+  content: '';
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: block;
+  position: absolute;
+  bottom: -4vw;
+  left: -3vw;
+  right: -3vw;
 }
 .playlists > ul {
   display: flex;

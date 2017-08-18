@@ -21,8 +21,8 @@ ol.songItems{padding-left: 2.8vw;
 	.sourceCode {max-height: 7vw; line-height: 7.2vw; border: solid #fff 1px; border-radius: 3.5vw; color: #fff; text-decoration: none; padding: 0 1em; letter-spacing: 0.1em;}
 }
 
-.siteNav { position: fixed; z-index: 3; top: 16.5vw; background: #fff; width: 100%;
-	>ol {display: flex; text-align: center; border-bottom: 1px solid #ccc; font-size: 1.1em;
+.siteNav { position: fixed; z-index: 3; top: 16.3vw; background: #fff; width: 100%;
+	>ol {display: flex; text-align: center; border-bottom: 1px solid rgba(0,0,0,.1); font-size: 1.1em;
 		>li {flex: 1;
 			>span {max-height: 10.3vw;line-height: 11.3vw; display: inline-block; position: relative;}
 		}
@@ -50,6 +50,12 @@ ol.songItems{padding-left: 2.8vw;
 		.hotfoot{height: 55px; line-height: 55px; text-align: center; color: #999; }
 	}
 	>li.active {display: block}
+	#searchMusic { margin: 4vw 2.6vw; background: #ebecec; position: relative; padding: 0 8vw; border-radius: 50%; border-radius: 5vw; 
+		input{ width: 100%; height: 8vw; background: transparent; font-size: 3.7vw; line-height: 4.8vw; border: 0; outline: none;}
+		.svgSearch {width: 3.8vw; height: 3.8vw; fill: #999; position: absolute; top: 2.2vw; left: 2.6vw;}
+		.searchName {    position: absolute; color: #c9c9c9; font-size: 3.8vw; top: 1vw; left: 8vw; background: transparent; pointer-events: none; cursor: none;}
+	}
+	#searchMusic::after{content: ''; border-bottom: 1px solid rgba(0,0,0,.1); display: block; position: absolute; bottom: -4vw; left: -3vw; right: -3vw;}
 }
 
 .playlists { //margin-top: 31.5vw; 
