@@ -257,13 +257,6 @@ document.querySelector('#searchMusic').addEventListener('input', function (e) {
 		hotSearch.classList.remove('userHide');
 	});
 
-	// close.forEach(function(e){
-	// 	e.addEventListener('click',function(e){
-	// 	let target = e.currentNode
-	// 	let index = [].indexOf.call(close, target)
-	// 	})
-	// })
-
 	searchResult.innerText = value;
 
 	// console.log(value)	
@@ -290,6 +283,21 @@ document.querySelector('#searchMusic').addEventListener('input', function (e) {
 			}
 		});
 	});
+});
+
+document.querySelectorAll('.hotSearch .close').forEach(function (e) {
+	var close = document.querySelectorAll('.hotSearch .close');
+	var liParent = document.querySelector('.hotSearch .songItems');
+	var delLi = document.querySelectorAll('.hotSearch .songItems >li');
+
+	e.onclick = function (e) {
+		var target = e.currentTarget;
+		var index = [].indexOf.call(close, target);
+		console.log(target, index);
+		console.log(delLi[index]);
+		var deltarget = delLi[index];
+		liParent.removeChild(deltarget);
+	};
 });
 
 function search(keyword) {

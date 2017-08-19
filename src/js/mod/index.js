@@ -150,12 +150,6 @@ document.querySelector('#searchMusic').addEventListener('input', function(e){
 		hotSearch.classList.remove('userHide')
 	})
 
-	// close.forEach(function(e){
-	// 	e.addEventListener('click',function(e){
-	// 	let target = e.currentNode
-	// 	let index = [].indexOf.call(close, target)
-	// 	})
-	// })
 
 	searchResult.innerText = value
 
@@ -190,6 +184,21 @@ document.querySelector('#searchMusic').addEventListener('input', function(e){
 			}
 		})
 	})
+})
+
+document.querySelectorAll('.hotSearch .close').forEach(function(e){
+	let close = document.querySelectorAll('.hotSearch .close')
+	let liParent = document.querySelector('.hotSearch .songItems')
+	let delLi = document.querySelectorAll('.hotSearch .songItems >li')
+
+	e.onclick = function(e){
+        let target = e.currentTarget
+        let index = [].indexOf.call(close,target)
+     	console.log(target, index)
+		console.log(delLi[index])
+		let deltarget = delLi[index]
+		liParent.removeChild(deltarget)
+	}
 })
 
 function search(keyword){
