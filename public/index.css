@@ -703,5 +703,52 @@ ol.songItems li .time {
   font-size: 3.2vw;
   line-height: 4.88vw;
 }
+#playListPage .playList .comment > li {
+  display: flex;
+  align-items: top;
+  padding: 5px 5px  0 5px;
+}
+#playListPage .playList .comment > li .header {
+  width: 30px;
+  margin: 5px;
+}
+#playListPage .playList .comment > li .header img {
+  width: 100%;
+  border-radius: 50%;
+}
+#playListPage .playList .comment > li .title-h {
+  flex: 1;
+}
+#playListPage .playList .comment > li .title-h .title {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  justify-content: space-between;
+}
+#playListPage .playList .comment > li .title-h .title h3 {
+  color: #666;
+  font-size: 13px;
+}
+#playListPage .playList .comment > li .title-h .title time {
+  font-size: 12px;
+  color: #999;
+  line-height: 14px;
+}
+#playListPage .playList .comment > li .title-h .title span {
+  font-size: 12px;
+  color: #666;
+}
+#playListPage .playList .comment > li .title-h .title svg {
+  width: 15px;
+  height: 15px;
+  fill: #999;
+  margin-right: 1vw;
+}
+#playListPage .playList .comment > li .title-h .message {
+  padding: 1vw 2vw 1vw 0;
+  font-size: 14px;
+  line-height: 21px;
+  border-bottom: solid rgba(0, 0, 0, 0.1) 1px;
+}
 
 /*# sourceMappingURL=index.css.map*/
