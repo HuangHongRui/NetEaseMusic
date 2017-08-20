@@ -64,6 +64,8 @@
 .page .disc-container .disc .light {
   width: 80vw;
   position: absolute;
+  top: 0;
+  left: 10vw;
   z-index: 1;
   animation: circle 15s infinite linear;
   animation-play-state: paused;
@@ -71,6 +73,8 @@
 .page .disc-container .disc .cover {
   width: 50vw;
   position: absolute;
+  top: 15vw;
+  left: 25vw;
   border-radius: 50%;
   animation: circle 15s infinite linear;
   animation-play-state: paused;
@@ -94,7 +98,7 @@
   color: #fff;
   text-align: center;
   line-height: 2;
-  margin-top: 20px;
+  margin-top: 5.333vw;
   z-index: 1;
   padding: 0vw 8.8vw;
 }
@@ -137,8 +141,8 @@
   width: 70%;
   height: 2vw;
   background: #eee;
-  vertical-align: 2px;
-  border-radius: 3px;
+  vertical-align: 0.5333vw;
+  border-radius: 0.8vw;
   cursor: pointer;
 }
 .page .song-description .progress .progress-bar .now {
@@ -153,19 +157,19 @@
   content: '';
   position: absolute;
   left: 100%;
-  width: 3px;
-  height: 7px;
+  width: 0.8vw;
+  height: 1.8666vw;
   background: lightblue;
 }
 .page .song-description .progress span {
   color: #ddd;
-  font-size: 14px;
+  font-size: 3.7333vw;
 }
 .page:before {
   content: '';
   display: block;
   position: absolute;
-  border: 1px solid;
+  border: 0.26666vw solid;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
@@ -658,6 +662,7 @@ ol.songItems li .time {
   height: 11.7vw;
   display: flex;
   align-items: center;
+  margin-left: -2vw;
 }
 #playListPage .plheader .ct .titleinfo .info {
   color: rgba(255, 255, 255, 0.7);
@@ -686,7 +691,7 @@ ol.songItems li .time {
 }
 #playListPage .introduce div span {
   font-size: 3vw;
-  border: solid 1px rgba(0, 0, 0, 0.1);
+  border: solid 0.266vw rgba(0, 0, 0, 0.1);
   border-radius: 20%;
   padding: .5vw 1vw;
   margin: 1vw;
@@ -722,11 +727,11 @@ ol.songItems li .time {
 #playListPage .playList .comment > li {
   display: flex;
   align-items: top;
-  padding: 5px 5px  0 5px;
+  padding: 1.33vw 1.33vw  0 1.33vw;
 }
 #playListPage .playList .comment > li .header {
-  width: 30px;
-  margin: 5px;
+  width: 8vw;
+  margin: 1.33vw;
 }
 #playListPage .playList .comment > li .header img {
   width: 100%;
@@ -743,28 +748,28 @@ ol.songItems li .time {
 }
 #playListPage .playList .comment > li .title-h .title h3 {
   color: #666;
-  font-size: 13px;
+  font-size: 3.466vw;
 }
 #playListPage .playList .comment > li .title-h .title time {
-  font-size: 12px;
+  font-size: 3.2vw;
   color: #999;
-  line-height: 14px;
+  line-height: 3.733vw;
 }
 #playListPage .playList .comment > li .title-h .title span {
-  font-size: 12px;
+  font-size: 3.2vw;
   color: #666;
 }
 #playListPage .playList .comment > li .title-h .title svg {
-  width: 15px;
-  height: 15px;
+  width: 4vw;
+  height: 4vw;
   fill: #999;
   margin-right: 1vw;
 }
 #playListPage .playList .comment > li .title-h .message {
   padding: 1vw 2vw 1vw 0;
-  font-size: 14px;
-  line-height: 21px;
-  border-bottom: solid rgba(0, 0, 0, 0.1) 1px;
+  font-size: 3.733vw;
+  line-height: 5.6vw;
+  border-bottom: solid rgba(0, 0, 0, 0.1) 2.6vw;
 }
 
 /*# sourceMappingURL=index.css.map*/
