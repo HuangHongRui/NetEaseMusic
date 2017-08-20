@@ -168,10 +168,12 @@ document.querySelector('#searchMusic').addEventListener('input', function(e){
 		items.forEach( (ele) => {
 			let li = `
 			<li>
+				<a href="../../../bin/song.html?id=${ele.id}">
 				<svg class="svgSearch">
 					<use xlink:href="#icon-search"></use>
 				</svg>  
 				<span>${ele.name}</span>
+				</a>
 			</li>
 			`
 			document.querySelector("#output .songItems").innerHTML += li

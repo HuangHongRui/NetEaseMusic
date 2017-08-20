@@ -156,165 +156,13 @@ var getJSON = function getJSON(url) {
 	return promise;
 };
 
-setTimeout(function () {
-	getJSON('../src/js/lib/song.json').then(function (json) {
-		var items = json;
-		items.forEach(function (ele) {
-			var judge = Math.random() > 0.5 ? 'sq' : '';
-			var li = "\n\t\t<li>\n\t\t<a href=\"../../../bin/song.html?id=" + ele.id + "\">\n\t\t<h3>" + ele.name + "</h3>\n\t\t<p>\n\t\t<svg class=\"" + judge + " hide\">\n\t\t<use xlink:href=\"#icon-sq\"></use>\n\t\t</svg>\n\t\t" + ele.author + "-" + ele.info + "</p>\n\t\t<svg class=\"playCl\">\n\t\t<use xlink:href=\"#icon-play-circle\"></use>\n\t\t</svg>\n\t\t</a>\n\t\t</li>\n\t\t";
-			document.querySelector(".lastestMusic >.songItems").innerHTML += li;
-		});
-		var loadNode = document.querySelector(".loading");
-		loadNode.parentNode.removeChild(loadNode);
-	}, function () {});
-}, 1000);
-
-document.querySelectorAll('.tabItems >li').forEach(function (li) {
-	var lis = document.querySelectorAll('.tabItems >li');
-	var tabLis = document.querySelectorAll('.tabContent >li');
-	var index = void 0;
-	li.onclick = function (e) {
-		var target = e.currentTarget;
-		index = [].indexOf.call(lis, target);
-		lis.forEach(function (li) {
-			li.classList.remove('active');
-		});
-		target.classList.add('active');
-		tabLis.forEach(function (li) {
-			li.classList.remove('active');
-		});
-		tabLis[index].classList.add('active');
-
-		var tabLisNow = tabLis[index];
-		if (tabLisNow.getAttribute('data-downloaded') === 'yeah') {
-			// console.log('hahaha')
-			return;
-		}
-		if (index === 1) {
-			setTimeout(function () {
-				requestBase();
-				var loading = document.querySelector('.loading');
-				loading.parentNode.removeChild(loading);
-				tabLisNow.setAttribute('data-downloaded', 'yeah');
-			}, 500);
-		} else if (index === 2) {
-			getJSON('../src/js/lib/page3.json').then(function (response) {
-				// tabLisNow.innerText = response.text
-				tabLisNow.setAttribute('data-downloaded', 'yeah');
-			});
-		}
-	};
-});
-
-document.querySelector('.hotfoot span').addEventListener('click', function () {
-	requestBase();
-});
-
-function requestBase() {
-	getJSON('../src/js/lib/page2.json').then(function (response) {
-		// tabLisNow.innerText = response.text
-		var items = response;
-		items.forEach(function (ele) {
-			var judge = Math.random() > 0.5 ? 'sq' : '';
-			var li = "\n\t\t\t\t<li>\n\t\t\t\t<div>" + ele.num + "</div>\n\t\t\t\t<a href=\"../../../bin/song.html?id=" + ele.id + "\">\n\t\t\t\t<h3>" + ele.name + "</h3>\n\t\t\t\t<p>\n\t\t\t\t<svg class=\"" + judge + " hide\">\n\t\t\t\t<use xlink:href=\"#icon-sq\"></use>\n\t\t\t\t</svg>\n\t\t\t\t" + ele.author + "-" + ele.info + "</p>\n\t\t\t\t<svg class=\"playCl\">\n\t\t\t\t<use xlink:href=\"#icon-play-circle\"></use>\n\t\t\t\t</svg>\n\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t";
-			document.querySelector(".songItems.hot").innerHTML += li;
-		});
+getJSON('../src/js/lib/song.json').then(function (response) {
+	var items = response;
+	items.forEach(function (ele) {
+		var li = "\n\t\t<li>\n            <div>" + ele.id + "</div>\n          \t<a href=\"../../../bin/song.html?id=" + ele.id + "\">\n            \t<h3>" + ele.name + "</h3> \n            \t<p>" + ele.author + "-" + ele.info + "</p>\n              \t<svg class=\"playCl\">\n                    <use xlink:href=\"#icon-play-circle\"></use>\n     \t \t\t</svg>\n            </a>\n      \t</li>\n\t\t";
+		document.querySelector("#playListPage >.playList >.songItems").innerHTML += li;
 	});
-}
-
-var clockLock = undefined;
-document.querySelector('#searchMusic').addEventListener('input', function (e) {
-	var inputNode = e.target;
-	var value = inputNode.value.trim();
-	var output = document.querySelector('#output');
-	var label = document.querySelector('label.searchName');
-	var labelParent = document.querySelector('#searchMusic input');
-	var hotSearch = document.querySelector('.hotSearch');
-	var svgClose = document.querySelector('.svgClose');
-	var songItems = document.querySelector("#output .songItems");
-	var noResult = document.querySelector("#output .noResult");
-	var searchResult = document.querySelector('.searchResult span');
-	var close = document.querySelectorAll('.hotSearch .close');
-
-	// console.log(labelParent.value)
-	if (labelParent.value === '') {
-		output.classList.add('userHide');
-		svgClose.classList.add('userHide');
-		label.classList.remove('userHide');
-		hotSearch.classList.remove('userHide');
-	} else if (labelParent.value !== '') {
-		label.classList.add('userHide');
-		hotSearch.classList.add('userHide');
-		output.classList.remove('userHide');
-		svgClose.classList.remove('userHide');
-	}
-
-	svgClose.addEventListener('click', function (e) {
-		labelParent.value = '';
-		output.classList.add('userHide');
-		svgClose.classList.add('userHide');
-		label.classList.remove('userHide');
-		hotSearch.classList.remove('userHide');
-	});
-
-	searchResult.innerText = value;
-
-	// console.log(value)	
-	if (value === '') return;
-	if (clockLock) {
-		clearTimeout(clockLock);
-		console.log('有,毁了');
-	}
-
-	clockLock = setTimeout(function () {
-		search(value).then(function (result) {
-			if (result.length !== 0) {
-				if (songItems) songItems.innerHTML = '';
-				var items = result;
-				items.forEach(function (ele) {
-					var li = "\n\t\t\t<li>\n\t\t\t\t<a href=\"../../../bin/song.html?id=" + ele.id + "\">\n\t\t\t\t<svg class=\"svgSearch\">\n\t\t\t\t\t<use xlink:href=\"#icon-search\"></use>\n\t\t\t\t</svg>  \n\t\t\t\t<span>" + ele.name + "</span>\n\t\t\t\t</a>\n\t\t\t</li>\n\t\t\t";
-					document.querySelector("#output .songItems").innerHTML += li;
-					noResult.classList.add('userHide');
-					songItems.classList.remove('userHide');
-				});
-			} else {
-				noResult.classList.remove('userHide');
-				songItems.classList.add('userHide');
-			}
-		});
-	});
-});
-
-document.querySelectorAll('.hotSearch .close').forEach(function (e) {
-	var close = document.querySelectorAll('.hotSearch .close');
-	var liParent = document.querySelector('.hotSearch .songItems');
-	var delLi = document.querySelectorAll('.hotSearch .songItems >li');
-
-	e.onclick = function (e) {
-		var target = e.currentTarget;
-		var index = [].indexOf.call(close, target);
-		console.log(target, index);
-		console.log(delLi[index]);
-		var deltarget = delLi[index];
-		liParent.removeChild(deltarget);
-	};
-});
-
-function search(keyword) {
-	return new Promise(function (resolve, reject) {
-		// console.log('搜索' + keyword)
-		var database = [{ "id": "1", "name": "Strip That Down" }, { "id": "2", "name": "Despacito" }, { "id": "3", "name": "We Will Rock You" }, { "id": "4", "name": "Versace On The Floor" }, { "id": "5", "name": "The Show" }, { "id": "6", "name": "Rap God" }, { "id": "7", "name": "告白气球" }, { "id": "8", "name": "I Just Wanna Run" }, { "id": "9", "name": "Take Me to Your Heart" }, { "id": "10", "name": "Shape of You" }];
-		var result = database.filter(function (item) {
-			// console.log(item)
-			return item.name.indexOf(keyword) >= 0;
-		});
-		setTimeout(function () {
-			// console.log('搜索结果' + keyword)
-			// console.log(resolve(result))
-			resolve(result);
-		}, Math.random() * 1000 + 200);
-	});
-}
+}, function () {});
 
 /***/ }),
 /* 2 */
@@ -346,8 +194,8 @@ __webpack_require__(2);
 __webpack_require__(3);
 __webpack_require__(0);
 // require('mod/song.js');
+// require('mod/index.js');
 __webpack_require__(1);
-// require('mod/playlist.js');
 
 /***/ })
 /******/ ]);

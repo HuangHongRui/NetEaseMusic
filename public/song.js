@@ -135,186 +135,245 @@
 
 
 var getJSON = function getJSON(url) {
-	var promise = new Promise(function (resolve, reject) {
-		var client = new XMLHttpRequest();
-		client.open('GET', url);
-		client.onreadystatechange = handler;
-		client.responseType = "json";
-		client.setRequestHeader("Accept", "application/json");
-		client.send();
-		function handler() {
-			if (this.readyState !== 4) {
-				return;
-			}
-			if (this.status === 200) {
-				resolve(this.response);
-			} else {
-				reject(new Error(this.statusText));
-			}
-		};
-	});
-	return promise;
+  var promise = new Promise(function (resolve, reject) {
+    var client = new XMLHttpRequest();
+    client.open("GET", url);
+    client.onreadystatechange = handler;
+    client.responseType = "json";
+    client.setRequestHeader("Accept", "application/json");
+    client.send();
+
+    function handler() {
+      if (this.readyState !== 4) {
+        return;
+      }
+      if (this.status === 200) {
+        resolve(this.response);
+      } else {
+        reject(new Error(this.statusText));
+      }
+    };
+  });
+  return promise;
 };
 
-setTimeout(function () {
-	getJSON('../src/js/lib/song.json').then(function (json) {
-		var items = json;
-		items.forEach(function (ele) {
-			var judge = Math.random() > 0.5 ? 'sq' : '';
-			var li = "\n\t\t<li>\n\t\t<a href=\"../../../bin/song.html?id=" + ele.id + "\">\n\t\t<h3>" + ele.name + "</h3>\n\t\t<p>\n\t\t<svg class=\"" + judge + " hide\">\n\t\t<use xlink:href=\"#icon-sq\"></use>\n\t\t</svg>\n\t\t" + ele.author + "-" + ele.info + "</p>\n\t\t<svg class=\"playCl\">\n\t\t<use xlink:href=\"#icon-play-circle\"></use>\n\t\t</svg>\n\t\t</a>\n\t\t</li>\n\t\t";
-			document.querySelector(".lastestMusic >.songItems").innerHTML += li;
-		});
-		var loadNode = document.querySelector(".loading");
-		loadNode.parentNode.removeChild(loadNode);
-	}, function () {});
-}, 1000);
+getJSON("../src/js/lib/song.json").then(function (response) {
+  var id = parseInt(location.search.match(/\bid=([^&]*)/)[1], 10);
+  var songs = response;
+  var song = songs.filter(function (s) {
+    return s.id == id;
+  })[0];
+  var url = song.url,
+      cover = song.cover,
+      filter = song.filter,
+      lyric = song.lyric,
+      name = song.name,
+      author = song.author;
 
-document.querySelectorAll('.tabItems >li').forEach(function (li) {
-	var lis = document.querySelectorAll('.tabItems >li');
-	var tabLis = document.querySelectorAll('.tabContent >li');
-	var index = void 0;
-	li.onclick = function (e) {
-		var target = e.currentTarget;
-		index = [].indexOf.call(lis, target);
-		lis.forEach(function (li) {
-			li.classList.remove('active');
-		});
-		target.classList.add('active');
-		tabLis.forEach(function (li) {
-			li.classList.remove('active');
-		});
-		tabLis[index].classList.add('active');
-
-		var tabLisNow = tabLis[index];
-		if (tabLisNow.getAttribute('data-downloaded') === 'yeah') {
-			// console.log('hahaha')
-			return;
-		}
-		if (index === 1) {
-			setTimeout(function () {
-				requestBase();
-				var loading = document.querySelector('.loading');
-				loading.parentNode.removeChild(loading);
-				tabLisNow.setAttribute('data-downloaded', 'yeah');
-			}, 500);
-		} else if (index === 2) {
-			getJSON('../src/js/lib/page3.json').then(function (response) {
-				// tabLisNow.innerText = response.text
-				tabLisNow.setAttribute('data-downloaded', 'yeah');
-			});
-		}
-	};
+  initText(name, author, lyric, url, cover, filter);
 });
 
-document.querySelector('.hotfoot span').addEventListener('click', function () {
-	requestBase();
-});
-
-function requestBase() {
-	getJSON('../src/js/lib/page2.json').then(function (response) {
-		// tabLisNow.innerText = response.text
-		var items = response;
-		items.forEach(function (ele) {
-			var judge = Math.random() > 0.5 ? 'sq' : '';
-			var li = "\n\t\t\t\t<li>\n\t\t\t\t<div>" + ele.num + "</div>\n\t\t\t\t<a href=\"../../../bin/song.html?id=" + ele.id + "\">\n\t\t\t\t<h3>" + ele.name + "</h3>\n\t\t\t\t<p>\n\t\t\t\t<svg class=\"" + judge + " hide\">\n\t\t\t\t<use xlink:href=\"#icon-sq\"></use>\n\t\t\t\t</svg>\n\t\t\t\t" + ele.author + "-" + ele.info + "</p>\n\t\t\t\t<svg class=\"playCl\">\n\t\t\t\t<use xlink:href=\"#icon-play-circle\"></use>\n\t\t\t\t</svg>\n\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t";
-			document.querySelector(".songItems.hot").innerHTML += li;
-		});
-	});
+function initText(name, author, lyric, url, cover, filter) {
+  var musicName = document.querySelector('.musicName');
+  musicName.innerHTML = name + " - <span>" + author + "</span>";
+  document.querySelector('.cover').setAttribute("src", cover);
+  var page = document.querySelector('.page');
+  page.style.cssText = "background:url(" + filter + ") no-repeat; background-size: cover; transform-origin:center top; background-position:50%; transition : opacity .3s linear";
+  autoPlay(url);
+  initLyric(lyric);
 }
 
-var clockLock = undefined;
-document.querySelector('#searchMusic').addEventListener('input', function (e) {
-	var inputNode = e.target;
-	var value = inputNode.value.trim();
-	var output = document.querySelector('#output');
-	var label = document.querySelector('label.searchName');
-	var labelParent = document.querySelector('#searchMusic input');
-	var hotSearch = document.querySelector('.hotSearch');
-	var svgClose = document.querySelector('.svgClose');
-	var songItems = document.querySelector("#output .songItems");
-	var noResult = document.querySelector("#output .noResult");
-	var searchResult = document.querySelector('.searchResult span');
-	var close = document.querySelectorAll('.hotSearch .close');
+function autoPlay(url) {
+  var audio = document.createElement('audio');
+  var discNode = document.querySelector('.disc');
+  audio.src = url;
+  audio.oncanplay = function () {
+    audio.play();
+    discNode.className += " playing";
+  };
 
-	// console.log(labelParent.value)
-	if (labelParent.value === '') {
-		output.classList.add('userHide');
-		svgClose.classList.add('userHide');
-		label.classList.remove('userHide');
-		hotSearch.classList.remove('userHide');
-	} else if (labelParent.value !== '') {
-		label.classList.add('userHide');
-		hotSearch.classList.add('userHide');
-		output.classList.remove('userHide');
-		svgClose.classList.remove('userHide');
-	}
+  var play = document.querySelector('.icon-play');
+  play.onclick = function () {
+    // console.log("点到我了")
+    audio.play();
+    discNode.className += " playing";
+  };
+  var pause = document.querySelector('.icon-pause');
+  pause.onclick = function () {
+    // console.log("点到我了")
+    audio.pause();
+    discNode.classList.remove('playing');
+  };
+  //*********
+  var playbtn = document.querySelector('.play');
+  playbtn.onclick = function (e) {
+    audio.play();
+    discNode.className += " playing";
+    e.stopPropagation();
+  };
+  var pausebtn = document.querySelector('.pause');
+  pausebtn.onclick = function (e) {
+    audio.pause();
+    discNode.classList.remove('playing');
+    e.stopPropagation();
+  };
+  //*********
 
-	svgClose.addEventListener('click', function (e) {
-		labelParent.value = '';
-		output.classList.add('userHide');
-		svgClose.classList.add('userHide');
-		label.classList.remove('userHide');
-		hotSearch.classList.remove('userHide');
-	});
+  setInterval(function () {
+    var linesNode = document.querySelector('.lines');
+    var seconds = audio.currentTime;
+    var munites = ~~(seconds / 60);
+    var left = seconds - munites * 60;
+    var time = pad(munites) + ":" + pad(left);
+    var lines = linesNode.children;
+    var whichLine = void 0;
 
-	searchResult.innerText = value;
+    for (var i = 0; i < lines.length; i++) {
+      var currentLineTime = lines[i].getAttribute('data-time');
+      var nextLineTime = void 0;
+      if (lines[i + 1]) {
+        nextLineTime = lines[i + 1].getAttribute('data-time');
+      }
+      if (lines[i + 1] !== undefined && currentLineTime < time && nextLineTime > time) {
+        whichLine = lines[i];
+        // console.log(whichLine) 
+        break;
+      }
+    }
+    if (whichLine) {
 
-	// console.log(value)	
-	if (value === '') return;
-	if (clockLock) {
-		clearTimeout(clockLock);
-		console.log('有,毁了');
-	}
+      whichLine.classList.add('active');
+      if (whichLine.previousElementSibling) {
+        whichLine.previousElementSibling.classList.remove('active');
+      }
 
-	clockLock = setTimeout(function () {
-		search(value).then(function (result) {
-			if (result.length !== 0) {
-				if (songItems) songItems.innerHTML = '';
-				var items = result;
-				items.forEach(function (ele) {
-					var li = "\n\t\t\t<li>\n\t\t\t\t<a href=\"../../../bin/song.html?id=" + ele.id + "\">\n\t\t\t\t<svg class=\"svgSearch\">\n\t\t\t\t\t<use xlink:href=\"#icon-search\"></use>\n\t\t\t\t</svg>  \n\t\t\t\t<span>" + ele.name + "</span>\n\t\t\t\t</a>\n\t\t\t</li>\n\t\t\t";
-					document.querySelector("#output .songItems").innerHTML += li;
-					noResult.classList.add('userHide');
-					songItems.classList.remove('userHide');
-				});
-			} else {
-				noResult.classList.remove('userHide');
-				songItems.classList.add('userHide');
-			}
-		});
-	});
-});
+      var lyricHeight = document.querySelector('.lyric').clientHeight / 3;
 
-document.querySelectorAll('.hotSearch .close').forEach(function (e) {
-	var close = document.querySelectorAll('.hotSearch .close');
-	var liParent = document.querySelector('.hotSearch .songItems');
-	var delLi = document.querySelectorAll('.hotSearch .songItems >li');
+      var top = getOffset1(whichLine).top;
+      var linesTop = getOffset1(linesNode).top;
+      // let delta = top - linesTop - lyricHeight
+      // console.log(top, linesTop, lyricHeight, delta)
+      // linesNode.setAttribute("style",`transform : translateY(-${delta}px)`)
 
-	e.onclick = function (e) {
-		var target = e.currentTarget;
-		var index = [].indexOf.call(close, target);
-		console.log(target, index);
-		console.log(delLi[index]);
-		var deltarget = delLi[index];
-		liParent.removeChild(deltarget);
-	};
-});
 
-function search(keyword) {
-	return new Promise(function (resolve, reject) {
-		// console.log('搜索' + keyword)
-		var database = [{ "id": "1", "name": "Strip That Down" }, { "id": "2", "name": "Despacito" }, { "id": "3", "name": "We Will Rock You" }, { "id": "4", "name": "Versace On The Floor" }, { "id": "5", "name": "The Show" }, { "id": "6", "name": "Rap God" }, { "id": "7", "name": "告白气球" }, { "id": "8", "name": "I Just Wanna Run" }, { "id": "9", "name": "Take Me to Your Heart" }, { "id": "10", "name": "Shape of You" }];
-		var result = database.filter(function (item) {
-			// console.log(item)
-			return item.name.indexOf(keyword) >= 0;
-		});
-		setTimeout(function () {
-			// console.log('搜索结果' + keyword)
-			// console.log(resolve(result))
-			resolve(result);
-		}, Math.random() * 1000 + 200);
-	});
+      // $(whichLine).addClass('active').prev().removeClass('active')
+
+      // let top = $(whichLine).offset().top
+      // let linesTop = $('.lines').offset().top
+
+      // console.log(top1,":分111开:",top)
+      // console.log(linesTop1,":分222开:",linesTop)
+
+      var delta = top - linesTop - lyricHeight;
+      linesNode.setAttribute("style", "transform : translateY(-" + delta + "px)");
+    }
+  }, 300);
 }
+
+var getOffset1 = function getOffset1(elem) {
+  var docElem = document.documentElement;
+  var box = elem.getBoundingClientRect();
+  return {
+    top: box.top + docElem.scrollTop,
+    left: box.left + docElem.scrollLeft
+  };
+};
+
+function getOffset(Node, offset) {
+  if (!offset) {
+    offset = {};
+    offset.top = 0;
+    offset.left = 0;
+  }
+  if (Node == document.body) {
+    return offset;
+  }
+  offset.top += Node.offsetTop;offset.left += Node.offsetLeft;
+  return getOffset(Node.parentNode, offset);
+}
+
+function pad(num) {
+  return num > 10 ? num + '' : '0' + num;
+}
+
+function initLyric(lyric) {
+  var array = lyric.split('\n');
+  var regex = /^\[(.+)\](.*)/;
+  array = array.map(function (string, index) {
+    var matches = string.match(regex);
+    // console.log(matches)
+    if (!matches) return;
+    return { time: matches[1], words: matches[2] };
+  });
+  // console.log(array)
+  var lyricNode = document.querySelector('.lines');
+  array.map(function (object) {
+    // console.log(object)
+    if (!object) return;
+    var lyricP = document.createElement('p');
+    var lyricText = document.createTextNode(object.words);
+
+    lyricP.setAttribute('data-time', object.time);
+    lyricP.appendChild(lyricText);
+    lyricNode.appendChild(lyricP);
+    var allP = lyricNode.children;
+    for (var i in allP) {
+      if (allP[i].innerText === "") {
+        allP[i].remove();
+      }
+    }
+  });
+}
+
+/*
+for (var i in ac) {
+  if (ac[i].innerText === ""){
+  ac[i].remove()
+}
+}
+
+*/
+
+// getJSON("../src/js/lib/lyric.json").then(function(json) {
+//   let {lyric} = json
+//   let array = lyric.split('\n')
+//   let regex = /^\[(.+)\](.*)/
+//   array = array.map(function(string, index) {
+//   	let matches = string.match(regex)
+//   	// console.log(matches)
+//   	if (!matches) return
+//   	return {time: matches[1], words: matches[2]}
+//   })
+//   // console.log(array)
+//   let lyricNode = document.querySelector('.lines')
+//   array.map(function(object){
+//   	// console.log(object)
+//   	if(!object) return
+//   	let lyricP = document.createElement('p')
+//   	let lyricText = document.createTextNode(object.words)
+//   	lyricP.setAttribute('data-time', object.time)
+//   	lyricP.appendChild(lyricText)
+//   	lyricNode.appendChild(lyricP)
+//   })
+//   // console.log(lyricNode)
+
+// }, function(error) {
+//   console.error('出错了', error);
+// });
+
+
+// let xhr = new XMLHttpRequest()
+// xhr.open("get","../src/js/lib/lyric.json")
+// xhr.onreadystatechange = function() {
+// 	if (xhr.readyState == 4) {
+// 		if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+// 			// console.log(xhr.responseText)
+// 			lyric
+// 		}
+// 	}
+// }
+
+// xhr.send()
 
 /***/ }),
 /* 2 */
@@ -345,8 +404,8 @@ __webpack_require__(4);
 __webpack_require__(2);
 __webpack_require__(3);
 __webpack_require__(0);
-// require('mod/song.js');
 __webpack_require__(1);
+// require('mod/index.js');
 // require('mod/playlist.js');
 
 /***/ })
