@@ -60,20 +60,39 @@ function autoPlay(url){
     audio.pause()
     discNode.classList.remove('playing')
   }
-//*********
-let playbtn = document.querySelector('.play')
-playbtn.onclick = function(e) {
-  audio.play()
-  discNode.className += " playing"
-  e.stopPropagation()
-}
-let pausebtn = document.querySelector('.pause')
-pausebtn.onclick = function(e) {
-  audio.pause()
-  discNode.classList.remove('playing')
-  e.stopPropagation()
-}
-//*********
+
+  const start = document.querySelector('.progress >.start')
+  const end = document.querySelector('.progress >.end')
+  const progressBar = document.querySelector('.progress >.progress-bar')
+  const now = document.querySelector('.progress .now')
+
+  function conversion(value) {
+    let minute = Math.floor(value / 60)
+    minute = minute.toString().length === 1 ? ('0' + minute) : minute
+    let second = Math.round(value % 60)
+    second = second.toString().length === 1 ? ('0' + second) : second
+    return `${minute}:${second}`
+  }
+
+  audio.onloadedmetadata = function() {
+    end.innerHTML = conversion(audio.duration)
+    start.innerHTML = conversion(audio.currentTime)
+  }
+
+  progressBar.addEventListener('click', function(e) {
+    let coordStart = this.getBoundingClientRect().left
+    let coordEnd = e.pageX
+    let p = (coordEnd - coordStart) / this.offsetWidth
+    now.style.width = p.toFixed(3) * 100 + '%'
+    audio.currentTime = p * audio.duration
+    audio.play()
+  })
+
+  setInterval(_=> {
+    start.innerHTML = conversion(audio.currentTime)
+    now.style.width = audio.currentTime / audio.duration.toFixed(3) * 100 + '%'
+  }, 1000)
+
 
 setInterval(()=>{
   let linesNode = document.querySelector('.lines')

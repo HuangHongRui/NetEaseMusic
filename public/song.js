@@ -204,20 +204,38 @@ function autoPlay(url) {
     audio.pause();
     discNode.classList.remove('playing');
   };
-  //*********
-  var playbtn = document.querySelector('.play');
-  playbtn.onclick = function (e) {
+
+  var start = document.querySelector('.progress >.start');
+  var end = document.querySelector('.progress >.end');
+  var progressBar = document.querySelector('.progress >.progress-bar');
+  var now = document.querySelector('.progress .now');
+
+  function conversion(value) {
+    var minute = Math.floor(value / 60);
+    minute = minute.toString().length === 1 ? '0' + minute : minute;
+    var second = Math.round(value % 60);
+    second = second.toString().length === 1 ? '0' + second : second;
+    return minute + ":" + second;
+  }
+
+  audio.onloadedmetadata = function () {
+    end.innerHTML = conversion(audio.duration);
+    start.innerHTML = conversion(audio.currentTime);
+  };
+
+  progressBar.addEventListener('click', function (e) {
+    var coordStart = this.getBoundingClientRect().left;
+    var coordEnd = e.pageX;
+    var p = (coordEnd - coordStart) / this.offsetWidth;
+    now.style.width = p.toFixed(3) * 100 + '%';
+    audio.currentTime = p * audio.duration;
     audio.play();
-    discNode.className += " playing";
-    e.stopPropagation();
-  };
-  var pausebtn = document.querySelector('.pause');
-  pausebtn.onclick = function (e) {
-    audio.pause();
-    discNode.classList.remove('playing');
-    e.stopPropagation();
-  };
-  //*********
+  });
+
+  setInterval(function (_) {
+    start.innerHTML = conversion(audio.currentTime);
+    now.style.width = audio.currentTime / audio.duration.toFixed(3) * 100 + '%';
+  }, 1000);
 
   setInterval(function () {
     var linesNode = document.querySelector('.lines');
